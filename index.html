@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>عالم جواهر التعليمي المريح</title>
+    <title>عالم جواهر المرح</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Baloo+Bhaijaan+2:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- تم إضافة خط المراعي (Almarai) كما طلبت -->
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700;800&family=Baloo+Bhaijaan+2:wght@400;500;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,7 +15,8 @@
                 extend: {
                     fontFamily: {
                         'kids': ['"Baloo Bhaijaan 2"', 'cursive'],
-                        'body': ['Tajawal', 'sans-serif']
+                        'body': ['Tajawal', 'sans-serif'],
+                        'almarai': ['Almarai', 'sans-serif'] /* تعريف خط المراعي للوجو */
                     },
                     colors: {
                         'jawaher-pink': '#F4D8DF',
@@ -93,7 +95,8 @@
     <div id="welcome-overlay" class="fixed inset-0 bg-[#F5F2EB] z-50 flex flex-col items-center justify-center p-6 text-center">
         <div class="glass-card p-8 w-full max-w-sm relative">
             <span class="text-8xl absolute -top-12 left-1/2 transform -translate-x-1/2 bounce-slow drop-shadow-sm">👑</span>
-            <h1 class="font-kids text-4xl text-jawaher-dark-pink mt-8 mb-4">عالم جواهر</h1>
+            <!-- تم استخدام خط المراعي للوجو هنا -->
+            <h1 class="font-almarai font-extrabold text-4xl text-jawaher-dark-pink mt-8 mb-4">عالم جواهر</h1>
             <p class="font-bold text-soft-text mb-8">أشطر وأحلى بنت في يسعور!</p>
             <button onclick="startAppWithVoice()" class="w-full bg-[#D67D98] text-white font-kids text-3xl py-4 rounded-full shadow-sm wiggle-hover active:scale-95 transition">
                 يلا نلعب! ✨
@@ -104,7 +107,8 @@
     <!-- شريط الرأس -->
     <header class="glass-card p-3 m-2 rounded-2xl z-40 relative">
         <div class="flex justify-between items-center px-1">
-            <h1 class="font-kids text-2xl font-bold flex items-center gap-2 text-jawaher-dark-pink">
+            <!-- تم استخدام خط المراعي للوجو هنا -->
+            <h1 class="font-almarai text-2xl font-extrabold flex items-center gap-2 text-jawaher-dark-pink">
                 <span class="bg-[#D67D98] text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm text-lg">👑</span>
                 جواهر
             </h1>
@@ -126,7 +130,6 @@
     <!-- ================= 1. الرئيسية ومهام اليوم (الترحيب الذكي) ================= -->
     <main id="view-home" class="view-section active container mx-auto px-4 py-4">
         
-        <!-- الترحيب الذكي اللي بالمربع الكبير (تم الاسترجاع) -->
         <div class="glass-card p-6 text-center mb-6 relative overflow-hidden border border-[#EAE1D1]">
             <div class="absolute -top-6 -right-6 text-8xl opacity-10" id="time-icon">☀️</div>
             <h2 id="dynamic-greeting" class="font-kids text-4xl text-[#D67D98] mb-3 bounce-slow">أهلاً يا أميرتي! 💖</h2>
@@ -231,7 +234,6 @@
     <!-- ================= 2. التحديات والألعاب المريحة ================= -->
     <main id="view-learn" class="view-section container mx-auto px-4 py-6">
         
-        <!-- تمت إضافة زر "لعبة الجمع ➕" هنا -->
         <div class="flex gap-2 mb-6 overflow-x-auto pb-3 hide-scrollbar">
             <button onclick="switchGame('game-addition')" class="game-tab-btn flex-shrink-0 bg-[#EAF6F5] text-[#4A9994] px-4 py-2 rounded-full font-bold border border-[#C9EAE7] shadow-sm active">تحدي الجمع ➕</button>
             <button onclick="switchGame('game-math')" class="game-tab-btn flex-shrink-0 bg-jawaher-yellow text-[#A39459] px-4 py-2 rounded-full font-bold border border-[#DCD09E] shadow-sm">تحدي العد 🍍</button>
@@ -242,7 +244,7 @@
             <button onclick="switchGame('game-piano')" class="game-tab-btn flex-shrink-0 bg-gray-100 text-gray-500 px-4 py-2 rounded-full font-bold border border-gray-200 shadow-sm">بيانو 🎹</button>
         </div>
 
-        <!-- 1. تحدي الجمع (الحساب) [تمت الإضافة بناءً على طلبك] -->
+        <!-- تحدي الجمع (الحساب) -->
         <div id="game-addition" class="game-container active">
             <div class="glass-card p-6 rounded-3xl border border-[#C9EAE7] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-[#EAF6F5] rounded-t-3xl overflow-hidden"><div id="addition-progress" class="h-full bg-[#7BC4BF] challenge-progress" style="width: 10%;"></div></div>
@@ -264,7 +266,7 @@
             </div>
         </div>
 
-        <!-- 2. تحدي العد -->
+        <!-- تحدي العد -->
         <div id="game-math" class="game-container hidden">
             <div class="glass-card p-6 rounded-3xl border border-[#DCD09E] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-jawaher-yellow rounded-t-3xl overflow-hidden"><div id="math-progress" class="h-full bg-[#D1C17B] challenge-progress" style="width: 10%;"></div></div>
@@ -284,7 +286,7 @@
             </div>
         </div>
 
-        <!-- 3. تحدي الرقم الأكبر -->
+        <!-- تحدي الرقم الأكبر -->
         <div id="game-bigger" class="game-container hidden">
             <div class="glass-card p-6 rounded-3xl border border-[#C2DDBF] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-[#DDECDA] rounded-t-3xl overflow-hidden"><div id="bigger-progress" class="h-full bg-[#A3C9A5] challenge-progress" style="width: 10%;"></div></div>
@@ -307,7 +309,7 @@
             </div>
         </div>
 
-        <!-- 4. تحدي الرقم الناقص -->
+        <!-- تحدي الرقم الناقص -->
         <div id="game-missing" class="game-container hidden">
             <div class="glass-card p-6 rounded-3xl border border-[#E6C1CF] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-[#F0D5E1] rounded-t-3xl overflow-hidden"><div id="missing-progress" class="h-full bg-[#D19AA8] challenge-progress" style="width: 10%;"></div></div>
@@ -367,14 +369,14 @@
     <main id="view-flashcards" class="view-section container mx-auto px-4 py-6">
         <div class="text-center mb-4">
             <h2 class="font-kids text-4xl text-[#A699B8] mb-2">بطاقات ناطقة 🦉</h2>
-            <p class="font-bold text-soft-text text-sm bg-[#FCF9F2] shadow-sm inline-block px-4 py-1 rounded-full border border-soft-border">المسي البطاقة لتسمعي اسمها!</p>
+            <p class="font-bold text-soft-text text-sm bg-[#FCF9F2] shadow-sm inline-block px-4 py-1 rounded-full border border-soft-border">المسي البطاقة لتسمعي اسمها اللطيف!</p>
         </div>
         <div id="flashcards-container" class="grid grid-cols-2 gap-4 px-1"></div>
     </main>
 
-    <!-- ================= 4. مرسم جواهر ================= -->
+    <!-- ================= 4. مرسم جواهر المريح ================= -->
     <main id="view-draw" class="view-section container mx-auto px-4 py-6 h-full">
-        <h2 class="font-kids text-4xl text-center text-[#73ACA9] mb-4">مرسم الأميرة 🎨</h2>
+        <h2 class="font-kids text-4xl text-center text-[#73ACA9] mb-4">مرسم الأميرة الهادئ 🎨</h2>
         <div class="glass-card p-4 rounded-3xl border border-[#7DB3B0]">
             <div class="flex flex-col gap-2 mb-4 bg-[#FCF9F2] p-3 rounded-2xl shadow-sm border border-soft-border">
                 <div class="flex flex-wrap justify-center gap-2">
@@ -386,6 +388,7 @@
                     <div class="w-px h-8 bg-[#EAE1D1] mx-1"></div>
                     <button onclick="setDrawMode('stamp', '⭐')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">⭐</button>
                     <button onclick="setDrawMode('stamp', '💖')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">💖</button>
+                    <button onclick="setDrawMode('stamp', '🦋')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">🦋</button>
                     <div class="w-px h-8 bg-[#EAE1D1] mx-1"></div>
                     <button onclick="clearCanvas()" class="w-9 h-9 rounded-full bg-[#F4EFE6] flex items-center justify-center border border-[#EAE1D1] text-sm" title="مسح">🗑️</button>
                 </div>
@@ -408,7 +411,7 @@
         <div id="videos-container" class="grid grid-cols-1 gap-6"></div>
     </main>
 
-    <!-- ================= 6. أشغال يدوية (منفصلة - تكبير وحفظ الصور) ================= -->
+    <!-- ================= 6. أشغال يدوية (الـ 20 صورة) ================= -->
     <main id="view-handicrafts" class="view-section container mx-auto px-4 py-6">
         <h2 class="font-kids text-4xl text-center text-[#D67D98] mb-2">أشغال وصور جواهر ✂️📸</h2>
         <p class="text-center text-soft-text font-bold mb-6 text-sm">المسي الصورة عشان تكبر وتنزليها!</p>
@@ -457,7 +460,7 @@
     <!-- ================= سكريبت التطبيق ================= -->
     <script>
         // =====================================================================
-        // === 🛑 منطقة التعديل للبابا أبو جواهر (الصور، الفيديو، الأشغال) 🛑 ===
+        // === 🛑 منطقة التعديل للبابا أبو جواهر (الصور والفيديو) 🛑 ===========
         // =====================================================================
         
         // 1. الفيديوهات والأناشيد
@@ -466,14 +469,16 @@
             { title: 'أغنية الألوان الحلوة', url: 'https://www.youtube.com/embed/7VIGhP3Y2yM' }
         ];
 
-        // 2. صور الأشغال اليدوية (منفردة ولما تضغط عليها بتكبر وتتنزل)
-        // بتقدر تحط اسم صورتك هون مثلاً url: 'rsm_jawaher.jpg'
-        let myHandicrafts = [
-            { url: 'https://placehold.co/600x600/F4D8DF/5A504E?text=رسمة+جواهر', title: 'رسمة حلوة' },
-            { url: 'https://placehold.co/600x600/E5D8A5/5A504E?text=صلصال', title: 'شكل صلصال' },
-            { url: 'https://placehold.co/600x600/E6E2EE/5A504E?text=تلوين', title: 'تلوين' },
-            { url: 'https://placehold.co/600x600/7BC4BF/5A504E?text=مكعبات', title: 'بناء مكعبات' }
-        ];
+        // 2. صور الأشغال اليدوية والألبوم (20 صورة تقرأ من مجلد images)
+        // عشان تضيف الصور: اعمل مجلد (folder) جنب ملف الـ HTML وسميه images
+        // وحط جواته الصور وسميهم 1.jpg و 2.jpg لحد 20.jpg
+        let myHandicrafts = [];
+        for(let i = 1; i <= 20; i++) {
+            myHandicrafts.push({
+                url: `images/${i}.jpg`,
+                title: `إبداع رقم ${i}`
+            });
+        }
 
         // 3. البطاقات التعليمية الناطقة
         let flashcards = [
@@ -673,7 +678,7 @@
             if(gameId === 'game-balloons') resetBalloons();
         }
 
-        // ================= التحديات والألغاز (مع تحدي الجمع الجديد) ================= //
+        // ================= التحديات والألغاز ================= //
         
         let examStates = { 
             addition: { q: 1, score: 0, total: 10, ans: 0 },
@@ -694,7 +699,7 @@
             document.getElementById(`${type}-final-msg`).innerText = msg;
         }
 
-        // 1. تحدي الجمع ➕ (الجديد)
+        // 1. تحدي الجمع ➕
         function startAdditionExam() { examStates.addition = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('addition-play-area').classList.remove('hidden'); document.getElementById('addition-result-area').classList.add('hidden'); document.getElementById('addition-result-area').classList.remove('flex'); nextAdditionQuestion(); }
         function nextAdditionQuestion() {
             if(examStates.addition.q > examStates.addition.total) { showChallengeResult('addition', examStates.addition.score, examStates.addition.total); return; }
@@ -702,7 +707,7 @@
             document.getElementById('addition-progress').style.width = `${(examStates.addition.q / examStates.addition.total) * 100}%`; 
             document.getElementById('addition-feedback').innerText = '';
             
-            let num1 = Math.floor(Math.random() * 5) + 1; // 1 لـ 5 عشان الجمع يكون مناسب لعمرها
+            let num1 = Math.floor(Math.random() * 5) + 1; 
             let num2 = Math.floor(Math.random() * 5) + 1;
             examStates.addition.ans = num1 + num2;
             
@@ -844,28 +849,25 @@
             });
         }
 
-        // تم تجهيز قسم "الأشغال اليدوية" لحاله مع إمكانية التكبير والتحميل
         function renderHandicrafts() {
             const craftsContainer = document.getElementById('handicrafts-container'); craftsContainer.innerHTML = '';
-            myHandicrafts.forEach(craft => {
+            myHandicrafts.forEach((craft, index) => {
                 craftsContainer.innerHTML += `<div class="glass-card rounded-xl overflow-hidden shadow-sm border border-[#EAE1D1] aspect-square cursor-pointer" onclick="openPhotoModal('${craft.url}')">
-                    <img src="${craft.url}" class="w-full h-full object-cover wiggle-hover" onerror="this.src='https://placehold.co/400x400/F5F2EB/5A504E?text=صورة'">
+                    <img src="${craft.url}" class="w-full h-full object-cover wiggle-hover" onerror="this.onerror=null; this.src='https://placehold.co/600x600/F5F2EB/5A504E?text=صورة+${index+1}'">
                     <div class="bg-white text-center p-1 text-xs font-bold text-soft-text border-t border-[#EAE1D1]">${craft.title}</div>
                 </div>`;
             });
         }
 
-        // فتح وإغلاق وتحميل الصورة من الـ Modal
         function openPhotoModal(url) {
             document.getElementById('modal-img').src = url;
             document.getElementById('photo-modal').classList.remove('hidden');
             document.getElementById('photo-modal').classList.add('flex');
             
-            // تهيئة زر التحميل
             document.getElementById('modal-download-btn').onclick = function() {
                 const link = document.createElement('a');
                 link.href = url;
-                link.download = 'Jawaher_Handicraft.jpg'; // اسم الصورة عند الحفظ
+                link.download = 'Jawaher_Handicraft.jpg'; 
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -922,10 +924,10 @@
         window.onload = () => {
             updateSmartGreeting();
             renderVideos();
-            renderHandicrafts(); // توليد الأشغال הيدوية بشكل منفصل
+            renderHandicrafts(); 
             renderFlashcards();
             setTimeout(resizeCanvas, 500); 
-            startAdditionExam(); // يبدأ بتحدي الجمع تلقائيا
+            startAdditionExam(); 
         };
         window.addEventListener('resize', resizeCanvas);
     </script>
