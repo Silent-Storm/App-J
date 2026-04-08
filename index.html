@@ -6,7 +6,7 @@
     <title>عالم جواهر المرح</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- تم إضافة خط المراعي (Almarai) كما طلبت -->
+    <!-- إضافة خط المراعي (Almarai) وخطوط الأطفال -->
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700;800&family=Baloo+Bhaijaan+2:wght@400;500;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,17 +16,17 @@
                     fontFamily: {
                         'kids': ['"Baloo Bhaijaan 2"', 'cursive'],
                         'body': ['Tajawal', 'sans-serif'],
-                        'almarai': ['Almarai', 'sans-serif'] /* تعريف خط المراعي للوجو */
+                        'almarai': ['Almarai', 'sans-serif'] 
                     },
                     colors: {
-                        'jawaher-pink': '#F4D8DF',
-                        'jawaher-yellow': '#F9F1D8',
-                        'jawaher-purple': '#E6E2EE',
-                        'jawaher-dark-pink': '#D67D98',
-                        'abu-jawaher-turq': '#7BC4BF',
-                        'warm-bg': '#F5F2EB', 
-                        'soft-text': '#5A504E', 
-                        'card-bg': '#FCFAF6' 
+                        'warm-bg': '#F4EFE6', 
+                        'warm-card': '#FCF9F2', 
+                        'jawaher-pink': '#E2ACB8', 
+                        'jawaher-yellow': '#E5D8A5', 
+                        'jawaher-purple': '#C6C0D5', 
+                        'abu-jawaher-turq': '#90C2BF', 
+                        'soft-text': '#5C544F', 
+                        'soft-border': '#EAE1D1'
                     }
                 }
             }
@@ -35,26 +35,31 @@
     <style>
         body { 
             -webkit-tap-highlight-color: transparent; 
-            background-color: #F5F2EB;
-            background-image: radial-gradient(rgba(214, 125, 152, 0.05) 2px, transparent 2px);
+            background-color: #F4EFE6; 
+            background-image: radial-gradient(rgba(226, 172, 184, 0.15) 2px, transparent 2px);
             background-size: 30px 30px;
             overscroll-behavior-y: none;
-            color: #5A504E; 
-            transition: filter 0.5s ease, background-color 0.5s ease;
+            color: #5C544F; 
             padding-bottom: calc(100px + env(safe-area-inset-bottom));
+            transition: filter 0.5s ease, background-color 0.5s ease;
         }
         
-        body.eye-care-mode { filter: sepia(0.35) brightness(0.85) contrast(0.95); background-color: #EFE6D5; }
+        /* وضع حماية العين الإضافي */
+        body.eye-care-mode { filter: sepia(0.25) brightness(0.85); background-color: #EFE4D3; }
 
         .view-section { display: none; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         .view-section.active { display: block; }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.98) translateY(10px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
         
-        .bounce-slow { animation: bounce 3.5s infinite ease-in-out; }
+        .bounce-slow { animation: bounce 4s infinite ease-in-out; }
         .wiggle-hover:active { animation: wiggle 0.4s ease-in-out; }
         @keyframes wiggle { 0%, 100% { transform: rotate(-2deg) scale(1.02); } 50% { transform: rotate(2deg) scale(1.02); } }
 
-        .glass-card { background: #FCFAF6; border: 2px solid rgba(244, 216, 223, 0.4); box-shadow: 0 4px 12px 0 rgba(90, 80, 78, 0.03); border-radius: 1.5rem; }
+        .glass-card { 
+            background: #FCF9F2; 
+            border: 2px solid #F4EFE6; 
+            box-shadow: 0 4px 12px rgba(92, 84, 79, 0.04); 
+        }
         
         .flip-card-inner { transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -63,20 +68,20 @@
         
         .memory-card { cursor: pointer; aspect-ratio: 1; }
         .memory-card.matched .flip-card-inner { transform: rotateY(180deg); }
-        .memory-card.matched .flip-card-back { background-color: #E6F2E8; border-color: #81C784; }
+        .memory-card.matched .flip-card-back { background-color: #DDECDA; border-color: #A3C9A5; }
 
         .confetti-piece { position: fixed; top: -10vh; z-index: 100; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        .nav-glass { background: #FCFAF6; border-top: 1px solid rgba(0,0,0,0.03); box-shadow: 0 -5px 20px rgba(0,0,0,0.03); padding-bottom: env(safe-area-inset-bottom); }
-        .nav-btn.active { transform: translateY(-3px) scale(1.05); font-weight: 800; color: #D67D98; }
-        .nav-btn { transition: all 0.3s ease; color: #B0A8A6; }
+        .nav-glass { background: #FCF9F2; border-top: 1px solid #EAE1D1; box-shadow: 0 -5px 15px rgba(0,0,0,0.02); padding-bottom: env(safe-area-inset-bottom); }
+        .nav-btn.active { transform: translateY(-3px) scale(1.05); font-weight: 800; color: #D18293; }
+        .nav-btn { transition: all 0.3s ease; color: #A8A09B; }
         
         .star-pulse { animation: starPulse 0.6s ease; }
         @keyframes starPulse { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
 
-        .piano-key { flex: 1; margin: 0 2px; border-radius: 0 0 12px 12px; transition: background 0.15s; box-shadow: 0 2px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); height: 110px; }
-        .piano-key:active { transform: translateY(3px); box-shadow: none; }
+        .piano-key { flex: 1; margin: 0 2px; border-radius: 0 0 12px 12px; transition: background 0.15s; border: 1px solid #EAE1D1; height: 110px; }
+        .piano-key:active { transform: translateY(3px); }
 
         .balloon { position: absolute; bottom: -100px; font-size: 3.5rem; cursor: pointer; user-select: none; transition: transform 0.15s; animation: floatUp linear forwards; }
         .balloon:active { transform: scale(1.3); opacity: 0; }
@@ -84,203 +89,136 @@
         .bad-item-hit { animation: shake 0.3s ease-in-out; filter: grayscale(50%); }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px) rotate(-5deg); } 75% { transform: translateX(5px) rotate(5deg); } }
 
-        #welcome-overlay { transition: opacity 0.6s ease, transform 0.6s ease; }
-        .hide-welcome { opacity: 0; pointer-events: none; transform: scale(1.05); }
+        #welcome-overlay, #loading-screen { transition: opacity 0.6s ease, transform 0.6s ease; }
+        .hide-screen { opacity: 0; pointer-events: none; transform: scale(1.05); }
         .challenge-progress { transition: width 0.4s ease; }
+
+        /* ستايل لصور الإنجازات (المهام) */
+        .task-image-preview { width: 100%; height: 180px; object-fit: cover; border-radius: 1rem; border: 4px solid #FCF9F2; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* قفل التطبيق على متصفحات الكمبيوتر */
+        #desktop-warning { display: none; }
+        @media (min-width: 768px) {
+            body > * { display: none !important; }
+            #desktop-warning { 
+                display: flex !important; flex-direction: column; justify-content: center; align-items: center; 
+                position: fixed; inset: 0; background: #F4EFE6; z-index: 999999; text-align: center; padding: 20px;
+            }
+        }
     </style>
 </head>
 <body class="font-body relative">
 
-    <!-- شاشة الترحيب الناعمة -->
-    <div id="welcome-overlay" class="fixed inset-0 bg-[#F5F2EB] z-50 flex flex-col items-center justify-center p-6 text-center">
-        <div class="glass-card p-8 w-full max-w-sm relative">
+    <!-- رسالة تحذير لأجهزة الكمبيوتر المتصفحات العادية -->
+    <div id="desktop-warning">
+        <span class="text-8xl mb-6 bounce-slow">📱</span>
+        <h1 class="font-almarai font-extrabold text-4xl text-[#D18293] mb-4">عالم جواهر المرح</h1>
+        <p class="font-bold text-2xl text-soft-text max-w-lg leading-relaxed">
+            يا بابا هاد التطبيق مخصص للهواتف المحمولة بس! <br> افتحه من موبايلك الآيفون عشان جواهر تقدر تلعب براحتها.
+        </p>
+    </div>
+
+    <!-- شاشة لودينج (وضعية انتظار التحميل) -->
+    <div id="loading-screen" class="fixed inset-0 bg-[#F4EFE6] z-[60] flex flex-col items-center justify-center text-center">
+        <span class="text-8xl bounce-slow drop-shadow-sm mb-4">👑</span>
+        <h1 class="font-almarai font-extrabold text-4xl text-[#D18293] animate-pulse">جاري تحميل عالم جواهر...</h1>
+        <p class="font-bold text-soft-text mt-4">لحظة يا أميرتي...</p>
+    </div>
+
+    <!-- شاشة الترحيب الناعمة (لطلب تشغيل الصوت) -->
+    <div id="welcome-overlay" class="fixed inset-0 bg-[#F4EFE6] z-50 flex flex-col items-center justify-center p-6 text-center hidden-initially">
+        <div class="bg-[#FCF9F2] p-8 rounded-3xl shadow-sm border-4 border-jawaher-pink max-w-sm w-full relative">
             <span class="text-8xl absolute -top-12 left-1/2 transform -translate-x-1/2 bounce-slow drop-shadow-sm">👑</span>
-            <!-- تم استخدام خط المراعي للوجو هنا -->
-            <h1 class="font-almarai font-extrabold text-4xl text-jawaher-dark-pink mt-8 mb-4">عالم جواهر</h1>
+            <h1 class="font-almarai font-extrabold text-4xl text-[#D18293] mt-8 mb-4">عالم جواهر المرح</h1>
             <p class="font-bold text-soft-text mb-8">أشطر وأحلى بنت في يسعور!</p>
-            <button onclick="startAppWithVoice()" class="w-full bg-[#D67D98] text-white font-kids text-3xl py-4 rounded-full shadow-sm wiggle-hover active:scale-95 transition">
+            <button onclick="startAppWithVoice()" class="w-full bg-[#E2ACB8] text-white font-kids text-3xl py-4 rounded-full shadow-sm wiggle-hover active:scale-95 transition">
                 يلا نلعب! ✨
             </button>
         </div>
     </div>
 
-    <!-- شريط الرأس -->
-    <header class="glass-card p-3 m-2 rounded-2xl z-40 relative">
-        <div class="flex justify-between items-center px-1">
-            <!-- تم استخدام خط المراعي للوجو هنا -->
-            <h1 class="font-almarai text-2xl font-extrabold flex items-center gap-2 text-jawaher-dark-pink">
-                <span class="bg-[#D67D98] text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm text-lg">👑</span>
+    <!-- شريط الرأس مع الترحيب الدائم (Dynamic Top-Center Greeting) -->
+    <header class="glass-card p-3 sticky top-0 z-40 rounded-b-3xl">
+        <!-- الترحيب الدائم في الوسط فوق -->
+        <div id="top-center-greeting" class="absolute left-1/2 transform -translate-x-1/2 top-2 bg-[#E2ACB8] text-white px-4 py-1 rounded-full text-xs md:text-sm font-bold shadow-sm whitespace-nowrap z-50 flex items-center gap-1">
+            <span id="center-day-time"></span>
+        </div>
+
+        <div class="container mx-auto flex justify-between items-center px-2 mt-4">
+            <!-- اللوجو بخط المراعي -->
+            <h1 class="font-almarai text-2xl font-extrabold flex items-center gap-2 text-[#D18293]">
+                <span class="bg-[#E2ACB8] text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm text-lg">👑</span>
                 جواهر
             </h1>
             
             <div class="flex items-center gap-2">
-                <button onclick="toggleEyeCare()" id="eye-btn" class="bg-[#E6E2EE] text-[#867B9E] w-9 h-9 rounded-full flex items-center justify-center shadow-sm text-lg wiggle-hover transition border border-white" title="راحة العين">
+                <!-- زر حماية العين (الوضع الليلي) -->
+                <button onclick="toggleEyeCare()" id="eye-btn" class="bg-jawaher-purple text-[#9086A8] w-9 h-9 rounded-full flex items-center justify-center shadow-sm text-lg wiggle-hover transition border border-[#D5CFE1]" title="راحة العين">
                     🌙
                 </button>
-                <div class="bg-[#F9F1D8] text-[#B59C49] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 shadow-sm border border-white cursor-pointer wiggle-hover" onclick="playSurprise()">
+                
+                <!-- عداد النجوم -->
+                <div class="bg-jawaher-yellow text-[#A39459] px-3 py-1.5 rounded-full font-bold flex items-center gap-1 shadow-sm border border-[#DCD09E] cursor-pointer wiggle-hover" onclick="playSurprise()">
                     <span id="star-icon" class="text-lg">⭐</span>
-                    <span id="star-count" class="text-lg font-kids text-soft-text">0</span>
+                    <span id="star-count" class="text-lg font-kids">0</span>
                 </div>
             </div>
         </div>
+        
+        <!-- السلوجان المتغير (20 عبارة) أسفل اللوجو -->
+        <div class="mt-2 text-center">
+            <p id="dynamic-slogan" class="font-kids font-bold text-[#90C2BF] text-sm animate-pulse"></p>
+        </div>
 
-        <div id="surprise-box" class="absolute top-16 left-1/2 transform -translate-x-1/2 bg-[#FCFAF6] text-jawaher-dark-pink p-4 rounded-2xl shadow-lg font-kids text-2xl hidden w-[90%] text-center border-2 border-jawaher-pink z-50 transition-all"></div>
+        <!-- صندوق رسائل الحب المفاجئة -->
+        <div id="surprise-box" class="absolute top-24 left-1/2 transform -translate-x-1/2 bg-[#FCF9F2] text-[#D18293] p-4 rounded-2xl shadow-lg font-kids text-xl hidden w-11/12 text-center border-2 border-[#E2ACB8] z-50 transition-all"></div>
     </header>
 
-    <!-- ================= 1. الرئيسية ومهام اليوم (الترحيب الذكي) ================= -->
-    <main id="view-home" class="view-section active container mx-auto px-4 py-4">
+    <!-- ================= 1. الرئيسية ومهام اليوم (مع ميزة إضافة الصورة والحفظ) ================= -->
+    <main id="view-home" class="view-section active container mx-auto px-4 py-6">
         
-        <div class="glass-card p-6 text-center mb-6 relative overflow-hidden border border-[#EAE1D1]">
-            <div class="absolute -top-6 -right-6 text-8xl opacity-10" id="time-icon">☀️</div>
-            <h2 id="dynamic-greeting" class="font-kids text-4xl text-[#D67D98] mb-3 bounce-slow">أهلاً يا أميرتي! 💖</h2>
-            <div class="bg-[#F4D8DF] inline-block px-4 py-2 rounded-full border border-white shadow-sm">
-                <p id="dynamic-day" class="text-sm font-bold text-[#8C5265]">أشطر بنت في يسعور!</p>
-            </div>
-        </div>
-        
-        <h3 class="font-kids text-2xl text-[#A688C4] mb-3 px-1 flex justify-between items-center">
+        <h3 class="font-kids text-2xl text-[#9086A8] mb-3 px-2 flex justify-between items-center">
             أشياء جواهر الحلوة ✅
-            <span class="text-xs bg-[#E6E2EE] text-[#8B74A8] px-3 py-1 rounded-full font-bold">+ نجمة ⭐</span>
+            <span class="text-xs bg-jawaher-purple text-[#766A90] px-3 py-1 rounded-full font-bold">+ نجمة ⭐</span>
         </h3>
         
-        <div class="flex flex-col gap-3 mb-6">
-            <!-- مهمة 1 -->
-            <div class="task-item bg-white p-3 rounded-2xl border border-[#F0EBE1] transition-all">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" class="w-6 h-6 rounded text-jawaher-dark-pink border-gray-200 focus:ring-0" onchange="handleTaskCheck(this, 'upload-1', 'شاطرة يا روحي!')">
-                    <span class="text-lg font-bold text-soft-text">فرشيت أسناني 🦷</span>
-                </label>
-                <div id="upload-1" class="hidden mt-3 pl-9 flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <input type="file" accept="image/*" id="file-1" class="hidden" onchange="applyImageAndBadge(this, 'preview-img-1', 'badge-1')">
-                        <button onclick="document.getElementById('file-1').click()" class="bg-[#F4D8DF] text-[#C26B85] px-3 py-1.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-1 wiggle-hover">
-                            <span>📸</span> أرفقي صورتك الحلوة
-                        </button>
-                    </div>
-                    <div id="img-container-1" class="hidden relative inline-block mt-2 w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-sm border-4 border-white overflow-hidden">
-                        <img id="preview-img-1" class="w-full h-full object-cover">
-                        <div id="badge-1" class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded-xl text-lg font-bold shadow-sm flex items-center gap-1 transform rotate-[-8deg] border border-[#F8D8E3] text-jawaher-dark-pink">⭐ بطلة الأسنان</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- مهمة 2 -->
-            <div class="task-item bg-white p-3 rounded-2xl border border-[#F0EBE1] transition-all">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" class="w-6 h-6 rounded text-jawaher-dark-pink border-gray-200 focus:ring-0" onchange="handleTaskCheck(this, 'upload-2', 'صحة وعافية يا حلوة')">
-                    <span class="text-lg font-bold text-soft-text">شربت الحليب 🥛</span>
-                </label>
-                <div id="upload-2" class="hidden mt-3 pl-9 flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <input type="file" accept="image/*" id="file-2" class="hidden" onchange="applyImageAndBadge(this, 'preview-img-2', 'badge-2')">
-                        <button onclick="document.getElementById('file-2').click()" class="bg-[#F4D8DF] text-[#C26B85] px-3 py-1.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-1 wiggle-hover">
-                            <span>📸</span> أرفقي صورتك الحلوة
-                        </button>
-                    </div>
-                    <div id="img-container-2" class="hidden relative inline-block mt-2 w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-sm border-4 border-white overflow-hidden">
-                        <img id="preview-img-2" class="w-full h-full object-cover">
-                        <div id="badge-2" class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded-xl text-lg font-bold shadow-sm flex items-center gap-1 transform rotate-[-8deg] border border-[#F8D8E3] text-jawaher-dark-pink">💖 صحة وعافية</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- مهمة 3 -->
-            <div class="task-item bg-white p-3 rounded-2xl border border-[#F0EBE1] transition-all">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" class="w-6 h-6 rounded text-jawaher-dark-pink border-gray-200 focus:ring-0" onchange="handleTaskCheck(this, 'upload-3', 'بطلة يسعور')">
-                    <span class="text-lg font-bold text-soft-text">رحت على يسعور 🏫</span>
-                </label>
-                <div id="upload-3" class="hidden mt-3 pl-9 flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <input type="file" accept="image/*" id="file-3" class="hidden" onchange="applyImageAndBadge(this, 'preview-img-3', 'badge-3')">
-                        <button onclick="document.getElementById('file-3').click()" class="bg-[#F4D8DF] text-[#C26B85] px-3 py-1.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-1 wiggle-hover">
-                            <span>📸</span> أرفقي صورتك الحلوة
-                        </button>
-                    </div>
-                    <div id="img-container-3" class="hidden relative inline-block mt-2 w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-sm border-4 border-white overflow-hidden">
-                        <img id="preview-img-3" class="w-full h-full object-cover">
-                        <div id="badge-3" class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded-xl text-lg font-bold shadow-sm flex items-center gap-1 transform rotate-[-8deg] border border-[#F8D8E3] text-jawaher-dark-pink">👑 أميرة يسعور</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- مهمة 4 -->
-            <div class="task-item bg-white p-3 rounded-2xl border border-[#F0EBE1] transition-all">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" class="w-6 h-6 rounded text-jawaher-dark-pink border-gray-200 focus:ring-0" onchange="handleTaskCheck(this, 'upload-4', 'الفواكه بتقويكي')">
-                    <span class="text-lg font-bold text-soft-text">أكلت فواكه 🍓🥭</span>
-                </label>
-                <div id="upload-4" class="hidden mt-3 pl-9 flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <input type="file" accept="image/*" id="file-4" class="hidden" onchange="applyImageAndBadge(this, 'preview-img-4', 'badge-4')">
-                        <button onclick="document.getElementById('file-4').click()" class="bg-[#F4D8DF] text-[#C26B85] px-3 py-1.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-1 wiggle-hover">
-                            <span>📸</span> أرفقي صورتك الحلوة
-                        </button>
-                    </div>
-                    <div id="img-container-4" class="hidden relative inline-block mt-2 w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-sm border-4 border-white overflow-hidden">
-                        <img id="preview-img-4" class="w-full h-full object-cover">
-                        <div id="badge-4" class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded-xl text-lg font-bold shadow-sm flex items-center gap-1 transform rotate-[-8deg] border border-[#F8D8E3] text-jawaher-dark-pink">🍓 ممتازة</div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- المهام الموسعة مع إمكانية التصوير والاحتفاظ بالصورة مع ختم -->
+        <div class="flex flex-col gap-3 mb-6" id="tasks-container">
+            <!-- سيتم توليد المهام هنا عبر الجافاسكربت لتسهيل الكود -->
         </div>
         
-        <button onclick="document.getElementById('nav-learn').click()" class="w-full bg-[#7BC4BF] text-white font-kids text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2">
-            يلا نلعب تحديات! 🎮✨
+        <button onclick="document.getElementById('nav-learn').click()" class="w-full bg-[#90C2BF] text-white font-kids text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2">
+            يلا نلعب تحديات حلوة! 🎮✨
         </button>
     </main>
 
-    <!-- ================= 2. التحديات والألعاب المريحة ================= -->
+    <!-- ================= 2. التحديات والألعاب المريحة للعين ================= -->
     <main id="view-learn" class="view-section container mx-auto px-4 py-6">
         
         <div class="flex gap-2 mb-6 overflow-x-auto pb-3 hide-scrollbar">
-            <button onclick="switchGame('game-addition')" class="game-tab-btn flex-shrink-0 bg-[#EAF6F5] text-[#4A9994] px-4 py-2 rounded-full font-bold border border-[#C9EAE7] shadow-sm active">تحدي الجمع ➕</button>
-            <button onclick="switchGame('game-math')" class="game-tab-btn flex-shrink-0 bg-jawaher-yellow text-[#A39459] px-4 py-2 rounded-full font-bold border border-[#DCD09E] shadow-sm">تحدي العد 🍍</button>
+            <button onclick="switchGame('game-math')" class="game-tab-btn flex-shrink-0 bg-jawaher-yellow text-[#A39459] px-4 py-2 rounded-full font-bold border border-[#DCD09E] shadow-sm active">تحدي العد 🍍</button>
             <button onclick="switchGame('game-bigger')" class="game-tab-btn flex-shrink-0 bg-[#DDECDA] text-[#6D936F] px-4 py-2 rounded-full font-bold border border-[#C2DDBF] shadow-sm">الرقم الأكبر ⚖️</button>
             <button onclick="switchGame('game-missing')" class="game-tab-btn flex-shrink-0 bg-[#F0D5E1] text-[#B87A96] px-4 py-2 rounded-full font-bold border border-[#E6C1CF] shadow-sm">الرقم الناقص 🔢</button>
             <button onclick="switchGame('game-memory')" class="game-tab-btn flex-shrink-0 bg-jawaher-purple text-[#9086A8] px-4 py-2 rounded-full font-bold border border-[#D5CFE1] shadow-sm">الذاكرة 🦄</button>
             <button onclick="switchGame('game-balloons')" class="game-tab-btn flex-shrink-0 bg-jawaher-pink text-[#B87C8B] px-4 py-2 rounded-full font-bold border border-[#D19AA8] shadow-sm">بالونات 🎈</button>
-            <button onclick="switchGame('game-piano')" class="game-tab-btn flex-shrink-0 bg-gray-100 text-gray-500 px-4 py-2 rounded-full font-bold border border-gray-200 shadow-sm">بيانو 🎹</button>
-        </div>
-
-        <!-- تحدي الجمع (الحساب) -->
-        <div id="game-addition" class="game-container active">
-            <div class="glass-card p-6 rounded-3xl border border-[#C9EAE7] text-center mb-6 relative">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#EAF6F5] rounded-t-3xl overflow-hidden"><div id="addition-progress" class="h-full bg-[#7BC4BF] challenge-progress" style="width: 10%;"></div></div>
-                <h3 class="font-bold text-2xl text-[#4A9994] mt-2 mb-1 font-kids">لعبة الجمع والحساب ➕</h3>
-                <p id="addition-status" class="text-xs font-bold text-[#5A8E8B] mb-4 bg-[#EAF6F5] inline-block px-3 py-1 rounded-full">التحدي 1 من 10</p>
-                <div id="addition-play-area">
-                    <div class="text-5xl font-bold mb-6 min-h-[80px] flex justify-center items-center gap-4 bg-[#FCF9F2] p-6 rounded-2xl shadow-sm border border-soft-border text-[#5A504E]">
-                        <span id="add-num1"></span> <span>+</span> <span id="add-num2"></span> <span>=</span> <span class="text-[#D67D98]">؟</span>
-                    </div>
-                    <div id="addition-options" class="grid grid-cols-3 gap-3 mb-4"></div>
-                </div>
-                <div id="addition-result-area" class="hidden flex-col items-center justify-center py-6">
-                    <span class="text-6xl mb-4 bounce-slow">🎓</span>
-                    <h3 class="font-kids text-3xl text-[#7BC4BF] mb-2">نجومك الحلوة: <span id="addition-final-score"></span>/10</h3>
-                    <p id="addition-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startAdditionExam()" class="bg-[#EAF6F5] text-[#4A9994] px-6 py-2 rounded-full font-bold shadow-sm border border-[#C9EAE7]">نلعب كمان مرة 🔄</button>
-                </div>
-                <p id="addition-feedback" class="text-xl font-bold h-8 transition-all"></p>
-            </div>
+            <button onclick="switchGame('game-piano')" class="game-tab-btn flex-shrink-0 bg-[#EAF6F5] text-[#55A49F] px-4 py-2 rounded-full font-bold border border-[#C9EAE7] shadow-sm">بيانو 🎹</button>
         </div>
 
         <!-- تحدي العد -->
-        <div id="game-math" class="game-container hidden">
+        <div id="game-math" class="game-container active">
             <div class="glass-card p-6 rounded-3xl border border-[#DCD09E] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-jawaher-yellow rounded-t-3xl overflow-hidden"><div id="math-progress" class="h-full bg-[#D1C17B] challenge-progress" style="width: 10%;"></div></div>
                 <h3 class="font-bold text-2xl text-[#B3A25A] mt-2 mb-1 font-kids">لعبة عد الفواكه 🍍</h3>
                 <p id="math-status" class="text-xs font-bold text-[#A39459] mb-4 bg-jawaher-yellow inline-block px-3 py-1 rounded-full">التحدي 1 من 10</p>
                 <div id="math-play-area">
-                    <div id="fruit-container" class="text-4xl mb-6 min-h-[80px] flex justify-center items-center gap-2 flex-wrap bg-[#FCF9F2] p-4 rounded-2xl shadow-sm border border-soft-border"></div>
+                    <div id="fruit-container" class="text-4xl mb-6 min-h-[80px] flex justify-center items-center gap-2 flex-wrap bg-white p-4 rounded-2xl shadow-sm border border-gray-50"></div>
                     <div id="math-options" class="grid grid-cols-3 gap-3 mb-4"></div>
                 </div>
                 <div id="math-result-area" class="hidden flex-col items-center justify-center py-6">
                     <span class="text-6xl mb-4 bounce-slow">🎁</span>
-                    <h3 class="font-kids text-3xl text-abu-jawaher-turq mb-2">نجومك الحلوة: <span id="math-final-score"></span>/10</h3>
+                    <h3 class="font-kids text-3xl text-[#8AD4CF] mb-2">نجومك الحلوة: <span id="math-final-score"></span>/10</h3>
                     <p id="math-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startMathExam()" class="bg-jawaher-yellow text-[#A39459] px-6 py-2 rounded-full font-bold shadow-sm border border-[#DCD09E]">نلعب كمان مرة 🔄</button>
+                    <button onclick="startMathExam()" class="bg-[#FDF3D0] text-[#B8962E] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1E4B3]">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="math-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
@@ -288,22 +226,22 @@
 
         <!-- تحدي الرقم الأكبر -->
         <div id="game-bigger" class="game-container hidden">
-            <div class="glass-card p-6 rounded-3xl border border-[#C2DDBF] text-center mb-6 relative">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#DDECDA] rounded-t-3xl overflow-hidden"><div id="bigger-progress" class="h-full bg-[#A3C9A5] challenge-progress" style="width: 10%;"></div></div>
-                <h3 class="font-bold text-2xl text-[#78A37A] mt-2 mb-1 font-kids">مين الأكبر يا بطلة؟ ⚖️</h3>
-                <p id="bigger-status" class="text-xs font-bold text-[#6D936F] mb-4 bg-[#DDECDA] inline-block px-3 py-1 rounded-full">التحدي 1 من 10</p>
+            <div class="glass-card p-6 rounded-3xl border border-[#CDE5D0] text-center mb-6 relative">
+                <div class="absolute top-0 left-0 w-full h-2 bg-[#E8F5E9] rounded-t-3xl overflow-hidden"><div id="bigger-progress" class="h-full bg-[#81C784] challenge-progress" style="width: 10%;"></div></div>
+                <h3 class="font-bold text-2xl text-[#6AA86D] mt-2 mb-1 font-kids">مين الأكبر يا بطلة؟ ⚖️</h3>
+                <p id="bigger-status" class="text-xs font-bold text-[#6AA86D] mb-4 bg-[#E8F5E9] inline-block px-3 py-1 rounded-full">التحدي 1 من 10</p>
                 <div id="bigger-play-area">
-                    <div class="flex justify-center items-center gap-4 mb-6 bg-[#FCF9F2] p-6 rounded-2xl shadow-sm border border-soft-border">
-                        <button id="bigger-opt-1" onclick="checkBiggerExam(1)" class="w-20 h-20 bg-[#EAF5E9] border border-[#C2DDBF] rounded-2xl text-4xl font-bold text-[#6D936F] shadow-sm active:translate-y-1 transition"></button>
-                        <span class="text-2xl font-bold text-[#C7C0B8]">أو</span>
-                        <button id="bigger-opt-2" onclick="checkBiggerExam(2)" class="w-20 h-20 bg-[#EAF5E9] border border-[#CDE5D0] rounded-2xl text-4xl font-bold text-[#6D936F] shadow-sm active:translate-y-1 transition"></button>
+                    <div class="flex justify-center items-center gap-4 mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-50">
+                        <button id="bigger-opt-1" onclick="checkBiggerExam(1)" class="w-20 h-20 bg-[#F4FAF5] border border-[#CDE5D0] rounded-2xl text-4xl font-bold text-[#5C9E60] shadow-sm active:translate-y-1 transition"></button>
+                        <span class="text-2xl font-bold text-gray-300">أو</span>
+                        <button id="bigger-opt-2" onclick="checkBiggerExam(2)" class="w-20 h-20 bg-[#F4FAF5] border border-[#CDE5D0] rounded-2xl text-4xl font-bold text-[#5C9E60] shadow-sm active:translate-y-1 transition"></button>
                     </div>
                 </div>
                 <div id="bigger-result-area" class="hidden flex-col items-center justify-center py-6">
                     <span class="text-6xl mb-4 bounce-slow">✨</span>
                     <h3 class="font-kids text-3xl text-[#81C784] mb-2">نجومك الحلوة: <span id="bigger-final-score"></span>/10</h3>
                     <p id="bigger-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startBiggerExam()" class="bg-[#DDECDA] text-[#6D936F] px-6 py-2 rounded-full font-bold shadow-sm border border-[#C2DDBF]">نلعب كمان مرة 🔄</button>
+                    <button onclick="startBiggerExam()" class="bg-[#E8F5E9] text-[#5C9E60] px-6 py-2 rounded-full font-bold shadow-sm border border-[#CDE5D0]">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="bigger-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
@@ -311,56 +249,58 @@
 
         <!-- تحدي الرقم الناقص -->
         <div id="game-missing" class="game-container hidden">
-            <div class="glass-card p-6 rounded-3xl border border-[#E6C1CF] text-center mb-6 relative">
-                <div class="absolute top-0 left-0 w-full h-2 bg-[#F0D5E1] rounded-t-3xl overflow-hidden"><div id="missing-progress" class="h-full bg-[#D19AA8] challenge-progress" style="width: 10%;"></div></div>
-                <h3 class="font-bold text-2xl text-[#C27F9D] mt-2 mb-1 font-kids">لغز الرقم المفقود 🔢</h3>
-                <p id="missing-status" class="text-xs font-bold text-[#B87A96] mb-4 bg-[#F0D5E1] inline-block px-3 py-1 rounded-full">اللغز 1 من 10</p>
+            <div class="glass-card p-6 rounded-3xl border border-[#F1C7D6] text-center mb-6 relative">
+                <div class="absolute top-0 left-0 w-full h-2 bg-[#FDE2ED] rounded-t-3xl overflow-hidden"><div id="missing-progress" class="h-full bg-[#DF85A3] challenge-progress" style="width: 10%;"></div></div>
+                <h3 class="font-bold text-2xl text-[#C46A88] mt-2 mb-1 font-kids">لغز الرقم المفقود 🔢</h3>
+                <p id="missing-status" class="text-xs font-bold text-[#C46A88] mb-4 bg-[#FDE2ED] inline-block px-3 py-1 rounded-full">اللغز 1 من 10</p>
                 <div id="missing-play-area">
-                    <div id="missing-sequence" class="flex justify-center items-center gap-3 mb-6 bg-[#FCF9F2] p-4 rounded-2xl shadow-sm border border-soft-border" dir="ltr"></div>
+                    <div id="missing-sequence" class="flex justify-center items-center gap-3 mb-6 bg-white p-4 rounded-2xl shadow-sm border border-gray-50" dir="ltr"></div>
                     <div id="missing-options" class="grid grid-cols-3 gap-3 mb-4"></div>
                 </div>
                 <div id="missing-result-area" class="hidden flex-col items-center justify-center py-6">
                     <span class="text-6xl mb-4 bounce-slow">💖</span>
-                    <h3 class="font-kids text-3xl text-[#D18293] mb-2">نجومك الحلوة: <span id="missing-final-score"></span>/10</h3>
+                    <h3 class="font-kids text-3xl text-[#DF85A3] mb-2">نجومك الحلوة: <span id="missing-final-score"></span>/10</h3>
                     <p id="missing-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startMissingExam()" class="bg-[#F0D5E1] text-[#B87A96] px-6 py-2 rounded-full font-bold shadow-sm border border-[#E6C1CF]">نلعب كمان مرة 🔄</button>
+                    <button onclick="startMissingExam()" class="bg-[#FDE2ED] text-[#C46A88] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1C7D6]">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="missing-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
         </div>
 
-        <!-- الذاكرة، البالونات، البيانو -->
+        <!-- الذاكرة -->
         <div id="game-memory" class="game-container hidden">
-            <div class="glass-card p-4 rounded-3xl border border-[#D5CFE1] text-center mb-6">
-                <h3 class="font-bold text-2xl text-[#9A8FAD] mb-1 font-kids">لعبة الذاكرة اللطيفة 🧠</h3>
+            <div class="glass-card p-4 rounded-3xl border border-[#D5CBE8] text-center mb-6">
+                <h3 class="font-bold text-2xl text-[#9474B8] mb-1 font-kids">لعبة الذاكرة اللطيفة 🧠</h3>
                 <div id="memory-grid" class="grid grid-cols-4 gap-2 mb-4"></div>
-                <button onclick="initMemoryGame()" class="bg-jawaher-purple text-[#9086A8] px-4 py-3 rounded-xl font-bold w-full border border-[#D5CFE1] shadow-sm">صورة جديدة 🔄</button>
+                <button onclick="initMemoryGame()" class="bg-jawaher-purple text-[#9474B8] px-4 py-3 rounded-xl font-bold w-full border border-[#D5CBE8] shadow-sm">صورة جديدة 🔄</button>
             </div>
         </div>
 
+        <!-- البالونات المطورة (تحدي التركيز وتجنب الأشياء السيئة) -->
         <div id="game-balloons" class="game-container hidden">
-            <div class="glass-card p-4 rounded-3xl border border-[#D19AA8] text-center mb-6 h-96 relative overflow-hidden flex flex-col justify-between">
+            <div class="glass-card p-4 rounded-3xl border border-[#EAC1CF] text-center mb-6 h-96 relative overflow-hidden flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-2xl text-[#C96B8A] mb-1 font-kids">تحدي البالونات 🎈</h3>
-                    <p class="text-sm text-soft-text font-bold bg-[#FCFAF6] inline-block px-3 py-1 rounded-full border border-soft-border">افقعي البالون 🎈 وابعدي عن النحلة والصبار!</p>
+                    <p class="text-sm text-soft-text font-bold bg-[#FDFBF7] inline-block px-3 py-1 rounded-full border border-[#F5EFE6]">افقعي البالون 🎈 وابعدي عن النحلة والصبار!</p>
                 </div>
                 <div id="balloon-area" class="absolute w-full h-full top-0 left-0 pointer-events-none"></div>
-                <button onclick="startBalloons()" id="btn-start-balloons" class="bg-jawaher-pink text-[#B87C8B] px-4 py-3 rounded-xl font-bold border border-[#D19AA8] z-10 mx-4 mb-4 shadow-sm">ابدأ التحدي!</button>
+                <button onclick="startBalloons()" id="btn-start-balloons" class="bg-jawaher-pink text-[#C96B8A] px-4 py-3 rounded-xl font-bold border border-[#EAC1CF] z-10 mx-4 mb-4 shadow-sm">ابدأ التحدي!</button>
             </div>
         </div>
 
+        <!-- البيانو -->
         <div id="game-piano" class="game-container hidden">
-            <div class="glass-card p-4 rounded-3xl border border-[#7DB3B0] text-center mb-6">
-                <h3 class="font-bold text-2xl text-[#6AA4A1] mb-1 font-kids">بيانو جواهر الهادئ 🎹</h3>
-                <div class="flex justify-center bg-[#ECE6DF] p-2 rounded-t-xl mx-2 shadow-sm mt-4 border border-soft-border">
-                    <div class="piano-key bg-jawaher-pink" onmousedown="playTone(261.63, this)" ontouchstart="playTone(261.63, this)"></div>
-                    <div class="piano-key bg-jawaher-yellow" onmousedown="playTone(293.66, this)" ontouchstart="playTone(293.66, this)"></div>
-                    <div class="piano-key bg-jawaher-purple" onmousedown="playTone(329.63, this)" ontouchstart="playTone(329.63, this)"></div>
-                    <div class="piano-key bg-abu-jawaher-turq" onmousedown="playTone(349.23, this)" ontouchstart="playTone(349.23, this)"></div>
-                    <div class="piano-key bg-[#FCF9F2]" onmousedown="playTone(392.00, this)" ontouchstart="playTone(392.00, this)"></div>
-                    <div class="piano-key bg-jawaher-dark-pink" onmousedown="playTone(440.00, this)" ontouchstart="playTone(440.00, this)"></div>
+            <div class="glass-card p-4 rounded-3xl border border-[#C9EAE7] text-center mb-6">
+                <h3 class="font-bold text-2xl text-[#55A49F] mb-1 font-kids">بيانو جواهر الهادئ 🎹</h3>
+                <div class="flex justify-center bg-[#F8FAFC] p-2 rounded-t-xl mx-2 shadow-sm mt-4 border border-gray-100">
+                    <div class="piano-key bg-[#F8D8E3]" onmousedown="playTone(261.63, this)" ontouchstart="playTone(261.63, this)"></div>
+                    <div class="piano-key bg-[#FDF3D0]" onmousedown="playTone(293.66, this)" ontouchstart="playTone(293.66, this)"></div>
+                    <div class="piano-key bg-[#EAE6F5]" onmousedown="playTone(329.63, this)" ontouchstart="playTone(329.63, this)"></div>
+                    <div class="piano-key bg-[#8AD4CF]" onmousedown="playTone(349.23, this)" ontouchstart="playTone(349.23, this)"></div>
+                    <div class="piano-key bg-white" onmousedown="playTone(392.00, this)" ontouchstart="playTone(392.00, this)"></div>
+                    <div class="piano-key bg-[#DF85A3]" onmousedown="playTone(440.00, this)" ontouchstart="playTone(440.00, this)"></div>
                 </div>
-                <div class="h-3 bg-[#DCD4CB] mx-2 rounded-b-xl mb-2"></div>
+                <div class="h-3 bg-[#E5E7EB] mx-2 rounded-b-xl mb-2"></div>
             </div>
         </div>
     </main>
@@ -368,57 +308,57 @@
     <!-- ================= 3. البطاقات التعليمية الناعمة ================= -->
     <main id="view-flashcards" class="view-section container mx-auto px-4 py-6">
         <div class="text-center mb-4">
-            <h2 class="font-kids text-4xl text-[#A699B8] mb-2">بطاقات ناطقة 🦉</h2>
-            <p class="font-bold text-soft-text text-sm bg-[#FCF9F2] shadow-sm inline-block px-4 py-1 rounded-full border border-soft-border">المسي البطاقة لتسمعي اسمها اللطيف!</p>
+            <h2 class="font-kids text-4xl text-[#AF8FCE] mb-2">بطاقات ناطقة 🦉</h2>
+            <p class="font-bold text-[#A8A0A0] text-sm bg-white shadow-sm inline-block px-4 py-1 rounded-full border border-[#F5EFE6]">المسي البطاقة لتسمعي اسمها اللطيف!</p>
         </div>
         <div id="flashcards-container" class="grid grid-cols-2 gap-4 px-1"></div>
     </main>
 
     <!-- ================= 4. مرسم جواهر المريح ================= -->
     <main id="view-draw" class="view-section container mx-auto px-4 py-6 h-full">
-        <h2 class="font-kids text-4xl text-center text-[#73ACA9] mb-4">مرسم الأميرة الهادئ 🎨</h2>
+        <h2 class="font-kids text-4xl text-center text-[#69C1BB] mb-4">مرسم الأميرة الهادئ 🎨</h2>
         <div class="glass-card p-4 rounded-3xl border border-[#7DB3B0]">
-            <div class="flex flex-col gap-2 mb-4 bg-[#FCF9F2] p-3 rounded-2xl shadow-sm border border-soft-border">
+            <div class="flex flex-col gap-2 mb-4 bg-white p-3 rounded-2xl shadow-sm border border-[#F5EFE6]">
                 <div class="flex flex-wrap justify-center gap-2">
-                    <button onclick="setDrawMode('color', '#E2ACB8')" class="tool-btn w-9 h-9 rounded-full bg-jawaher-pink border border-[#D19AA8] focus:ring-2 focus:ring-[#7DB3B0]"></button>
-                    <button onclick="setDrawMode('color', '#C6C0D5')" class="tool-btn w-9 h-9 rounded-full bg-jawaher-purple border border-[#B3ACBE] focus:ring-2 focus:ring-[#7DB3B0]"></button>
-                    <button onclick="setDrawMode('color', '#E5D8A5')" class="tool-btn w-9 h-9 rounded-full bg-jawaher-yellow border border-[#CFC18C] focus:ring-2 focus:ring-[#7DB3B0]"></button>
-                    <button onclick="setDrawMode('color', '#90C2BF')" class="tool-btn w-9 h-9 rounded-full bg-abu-jawaher-turq border border-[#7AAEA9] focus:ring-2 focus:ring-[#7DB3B0]"></button>
-                    <button onclick="setDrawMode('color', '#8B8484')" class="tool-btn w-9 h-9 rounded-full bg-[#8B8484] border border-[#736B6B] focus:ring-2 focus:ring-[#7DB3B0]"></button>
-                    <div class="w-px h-8 bg-[#EAE1D1] mx-1"></div>
-                    <button onclick="setDrawMode('stamp', '⭐')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">⭐</button>
-                    <button onclick="setDrawMode('stamp', '💖')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">💖</button>
-                    <button onclick="setDrawMode('stamp', '🦋')" class="tool-btn w-9 h-9 rounded-full bg-[#FCF9F2] shadow-sm border border-[#EAE1D1] flex items-center justify-center text-sm">🦋</button>
-                    <div class="w-px h-8 bg-[#EAE1D1] mx-1"></div>
-                    <button onclick="clearCanvas()" class="w-9 h-9 rounded-full bg-[#F4EFE6] flex items-center justify-center border border-[#EAE1D1] text-sm" title="مسح">🗑️</button>
+                    <button onclick="setDrawMode('color', '#F8D8E3')" class="tool-btn w-9 h-9 rounded-full bg-[#F8D8E3] border border-gray-100 focus:ring-2 focus:ring-gray-300"></button>
+                    <button onclick="setDrawMode('color', '#EAE6F5')" class="tool-btn w-9 h-9 rounded-full bg-[#EAE6F5] border border-gray-100 focus:ring-2 focus:ring-gray-300"></button>
+                    <button onclick="setDrawMode('color', '#FDF3D0')" class="tool-btn w-9 h-9 rounded-full bg-[#FDF3D0] border border-gray-100 focus:ring-2 focus:ring-gray-300"></button>
+                    <button onclick="setDrawMode('color', '#8AD4CF')" class="tool-btn w-9 h-9 rounded-full bg-[#8AD4CF] border border-gray-100 focus:ring-2 focus:ring-gray-300"></button>
+                    <button onclick="setDrawMode('color', '#8B8484')" class="tool-btn w-9 h-9 rounded-full bg-[#8B8484] border border-gray-100 focus:ring-2 focus:ring-gray-300"></button>
+                    <div class="w-px h-8 bg-gray-100 mx-1"></div>
+                    <button onclick="setDrawMode('stamp', '⭐')" class="tool-btn w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-sm">⭐</button>
+                    <button onclick="setDrawMode('stamp', '💖')" class="tool-btn w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-sm">💖</button>
+                    <button onclick="setDrawMode('stamp', '🦋')" class="tool-btn w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-sm">🦋</button>
+                    <div class="w-px h-8 bg-gray-100 mx-1"></div>
+                    <button onclick="clearCanvas()" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 text-sm" title="مسح">🗑️</button>
                 </div>
-                <div class="flex justify-center items-center gap-4 mt-2 border-t border-[#EAE1D1] pt-2">
-                    <span class="text-xs font-bold text-soft-text">حجم القلم:</span>
-                    <button onclick="setLineWidth(5)" class="w-4 h-4 bg-[#C2B9B4] rounded-full focus:bg-[#90C2BF]"></button>
-                    <button onclick="setLineWidth(10)" class="w-6 h-6 bg-[#9A908B] rounded-full focus:bg-[#90C2BF]"></button>
-                    <button onclick="setLineWidth(18)" class="w-8 h-8 bg-[#736B66] rounded-full focus:bg-[#90C2BF]"></button>
+                <div class="flex justify-center items-center gap-4 mt-2 border-t border-gray-50 pt-2">
+                    <span class="text-xs font-bold text-[#A8A0A0]">حجم القلم:</span>
+                    <button onclick="setLineWidth(5)" class="w-4 h-4 bg-[#D1CCCC] rounded-full focus:bg-[#8AD4CF]"></button>
+                    <button onclick="setLineWidth(10)" class="w-6 h-6 bg-[#A8A0A0] rounded-full focus:bg-[#8AD4CF]"></button>
+                    <button onclick="setLineWidth(18)" class="w-8 h-8 bg-[#6D6565] rounded-full focus:bg-[#8AD4CF]"></button>
                 </div>
             </div>
-            <div class="border border-[#EAE1D1] rounded-2xl overflow-hidden touch-none bg-[#FCF9F2] relative shadow-sm">
+            <div class="border border-gray-100 rounded-2xl overflow-hidden touch-none bg-white relative shadow-sm">
                 <canvas id="drawingBoard" class="w-full h-80"></canvas>
             </div>
         </div>
     </main>
 
-    <!-- ================= 5. أناشيد جواهر (منفصلة) ================= -->
+    <!-- ================= 5. الفيديوهات ================= -->
     <main id="view-videos" class="view-section container mx-auto px-4 py-6">
-        <h2 class="font-kids text-4xl text-center text-jawaher-dark-pink mb-6">أناشيدي الحلوة 📺</h2>
+        <h2 class="font-kids text-4xl text-center text-jawaher-dark-pink mb-6">أناشيد جواهر 📺</h2>
         <div id="videos-container" class="grid grid-cols-1 gap-6"></div>
     </main>
 
     <!-- ================= 6. أشغال يدوية (الـ 20 صورة) ================= -->
     <main id="view-handicrafts" class="view-section container mx-auto px-4 py-6">
         <h2 class="font-kids text-4xl text-center text-[#D67D98] mb-2">أشغال وصور جواهر ✂️📸</h2>
-        <p class="text-center text-soft-text font-bold mb-6 text-sm">المسي الصورة عشان تكبر وتنزليها!</p>
+        <p class="text-center text-soft-text font-bold mb-6 text-sm bg-white p-2 rounded-xl shadow-sm border border-[#EAE1D1]">أضف صورك في مجلد <code class="bg-gray-100 px-1 rounded">images</code> بأسماء من 1 إلى 20.jpg</p>
         <div id="handicrafts-container" class="grid grid-cols-2 gap-4"></div>
     </main>
 
-    <!-- نافذة تكبير الصورة (Lightbox) المخصصة لقسم الأشغال -->
+    <!-- نافذة تكبير الصورة (Lightbox) -->
     <div id="photo-modal" class="fixed inset-0 bg-black bg-opacity-80 z-[100] hidden flex-col items-center justify-center p-4">
         <button onclick="closePhotoModal()" class="absolute top-8 right-6 bg-white text-black w-10 h-10 rounded-full font-bold text-xl shadow-lg">X</button>
         <img id="modal-img" class="max-w-full max-h-[70vh] rounded-2xl object-contain mb-6 border-4 border-white shadow-2xl">
@@ -460,79 +400,126 @@
     <!-- ================= سكريبت التطبيق ================= -->
     <script>
         // =====================================================================
-        // === 🛑 منطقة التعديل للبابا أبو جواهر (الصور والفيديو) 🛑 ===========
+        // === 🛑 منطقة التعديل للبابا أبو جواهر (المهام، البطاقات، الفيديو) 🛑 ===
         // =====================================================================
         
-        // 1. الفيديوهات والأناشيد
+        // 1. المهام:
+        const dailyTasks = [
+            { id: 1, text: "فرشيت أسناني 🦷", msg: "شاطرة، أسنانك بتلمع!" },
+            { id: 2, text: "شربت الحليب 🥛", msg: "صحة وعافية يا حلوة" },
+            { id: 3, text: "رحت على يسعور 🏫", msg: "بطلة يسعور" },
+            { id: 4, text: "أكلت شنيتسل 🍗", msg: "أزكى شنيتسل لجواهر" },
+            { id: 5, text: "لعبت بالباربي 👗", msg: "أميرة تلعب مع باربي" },
+            { id: 6, text: "أكلت فواكه 🍓🥭", msg: "الفواكه بتقويكي" }
+        ];
+
+        // 2. الفيديوهات والأناشيد (تمت إضافة أنشودة الحروف الجديدة)
         let educationalVideos = [
             { title: 'أنشودة الحروف - الف ارنب يجري يلعب', url: 'https://www.youtube.com/embed/ZnnPhPAWxg4' },
-            { title: 'أغنية الألوان الحلوة', url: 'https://www.youtube.com/embed/7VIGhP3Y2yM' }
+            { title: 'أنشودة الحروف العربية', url: 'https://www.youtube.com/embed/5Fyw7l4-2lE' },
             { title: 'أغنية الألوان الحلوة', url: 'https://www.youtube.com/embed/7VIGhP3Y2yM' }
         ];
 
-        // 2. صور الأشغال اليدوية والألبوم (20 صورة تقرأ من مجلد images)
-        // عشان تضيف الصور: اعمل مجلد (folder) جنب ملف الـ HTML وسميه images
-        // وحط جواته الصور وسميهم 1.jpg و 2.jpg لحد 20.jpg
+        // 3. صور الأشغال اليدوية (20 صورة تلقائية من مجلد images)
         let myHandicrafts = [];
         for(let i = 1; i <= 20; i++) {
             myHandicrafts.push({
                 url: `images/${i}.jpg`,
-                title: `إبداع رقم ${i}`
+                title: `عمل فني ${i}`
             });
         }
 
-        // 3. البطاقات التعليمية الناطقة
+        // 4. البطاقات التعليمية الناطقة
         let flashcards = [
-            { url: 'https://placehold.co/400x300/F4D8DF/5A504E?text=صورة+فراولة', word: 'فَرَاوْلَة', emoji: '🍓', hint: 'مشروبك المفضل!' },
-            { url: 'https://placehold.co/400x300/F9F1D8/5A504E?text=صورة+أسد', word: 'أَسَد', emoji: '🦁', hint: 'ملك الغابة.' },
-            { url: 'https://placehold.co/400x300/E6E2EE/5A504E?text=صورة+فيل', word: 'فِيل', emoji: '🐘', hint: 'حيوان ضخم.' },
-            { url: 'https://placehold.co/400x300/D67D98/FFF?text=صورة+لبابا', word: 'بَابَا', emoji: '👨‍👧', hint: 'البابا شريف بحبك!' },
-            { url: 'https://placehold.co/400x300/7BC4BF/5A504E?text=صورة+مانجا', word: 'مَانْجَا', emoji: '🥭', hint: 'أزكى فواكه.' },
-            { url: 'https://placehold.co/400x300/F5F2EB/5A504E?text=صورة+كلب', word: 'كَلْب', emoji: '🐶', hint: 'بيقول هو هو!' },
-            { url: 'https://placehold.co/400x300/DDECDA/5A504E?text=صورة+قطة', word: 'قِطَّة', emoji: '🐱', hint: 'بتقول نياو!' },
-            { url: 'https://placehold.co/400x300/E5D8A5/5A504E?text=صورة+بطة', word: 'بَطَّة', emoji: '🦆', hint: 'بتسبح بالمي.' },
+            { url: 'https://placehold.co/400x300/E2ACB8/5C544F?text=صورة+فراولة', word: 'فَرَاوْلَة', emoji: '🍓', hint: 'مشروبك المفضل!' },
+            { url: 'https://placehold.co/400x300/E5D8A5/5C544F?text=صورة+أسد', word: 'أَسَد', emoji: '🦁', hint: 'ملك الغابة القوي.' },
+            { url: 'https://placehold.co/400x300/C6C0D5/5C544F?text=صورة+فيل', word: 'فِيل', emoji: '🐘', hint: 'حيوان ضخم جداً.' },
+            { url: 'https://placehold.co/400x300/90C2BF/5C544F?text=صورة+مانجا', word: 'مَانْجَا', emoji: '🥭', hint: 'فاكهة صفرا زاكية.' },
+            { url: 'https://placehold.co/400x300/DF85A3/FFF?text=صورة+لبابا', word: 'بَابَا', emoji: '👨‍👧', hint: 'البابا شريف بحبك!' },
+            { url: 'https://placehold.co/400x300/FCF9F2/5C544F?text=صورة+كلب', word: 'كَلْب', emoji: '🐶', hint: 'بيقول هو هو!' },
+            { url: 'https://placehold.co/400x300/DDECDA/5C544F?text=صورة+قطة', word: 'قِطَّة', emoji: '🐱', hint: 'بتقول نياو نياو!' },
+            { url: 'https://placehold.co/400x300/E5D8A5/5C544F?text=صورة+بطة', word: 'بَطَّة', emoji: '🦆', hint: 'بتسبح بالمي.' },
             { url: 'https://placehold.co/400x300/C6C0D5/5C544F?text=صورة+سيارة', word: 'سَيَّارَة', emoji: '🚗', hint: 'بتمشي بالشارع!' },
-            { url: 'https://placehold.co/400x300/F4D8DF/5A504E?text=صورة+باربي', word: 'بَارْبِي', emoji: '👗', hint: 'لعبتك المفضلة.' },
-            { url: 'https://placehold.co/400x300/90C2BF/5A504E?text=صورة+إجاص', word: 'إِجَاص', emoji: '🍐', hint: 'فاكهة خضرا مفيدة.' },
-            { url: 'https://placehold.co/400x300/FCF9F2/5A504E?text=صورة+تفاح', word: 'تُفَّاح', emoji: '🍎', hint: 'أحمر وزاكي.' },
-            { url: 'https://placehold.co/400x300/DDECDA/5A504E?text=صورة+روضة', word: 'رَوْضَة', emoji: '🏫', hint: 'روضة يسعور.' },
+            { url: 'https://placehold.co/400x300/E2ACB8/5C544F?text=صورة+باربي', word: 'بَارْبِي', emoji: '👗', hint: 'لعبتك المفضلة.' },
+            { url: 'https://placehold.co/400x300/90C2BF/5C544F?text=صورة+إجاص', word: 'إِجَاص', emoji: '🍐', hint: 'فاكهة خضرا مفيدة.' },
+            { url: 'https://placehold.co/400x300/FCF9F2/5C544F?text=صورة+تفاح', word: 'تُفَّاح', emoji: '🍎', hint: 'أحمر وزاكي.' },
+            { url: 'https://placehold.co/400x300/DDECDA/5C544F?text=صورة+روضة', word: 'رَوْضَة', emoji: '🏫', hint: 'روضة يسعور الحلوة.' },
             { url: 'https://placehold.co/400x300/DF85A3/FFF?text=لون+زهري', word: 'زَهْرِي', emoji: '🎀', hint: 'لونك المفضل.' },
-            { url: 'https://placehold.co/400x300/90C2BF/5A504E?text=لون+تركواز', word: 'تُرْكُوَاز', emoji: '💎', hint: 'لون البابا المفضل.' },
-            { url: 'https://placehold.co/400x300/E5D8A5/5A504E?text=صورة+شمس', word: 'شَمْس', emoji: '☀️', hint: 'بتدفينا الصبح.' }
+            { url: 'https://placehold.co/400x300/90C2BF/5C544F?text=لون+تركواز', word: 'تُرْكُوَاز', emoji: '💎', hint: 'لون البابا المفضل.' },
+            { url: 'https://placehold.co/400x300/E5D8A5/5C544F?text=صورة+شمس', word: 'شَمْس', emoji: '☀️', hint: 'بتدفينا الصبح.' }
         ];
         // =====================================================================
 
-        // --- الترحيب الذكي اللي بالمربع الكبير ---
-        function updateSmartGreeting() {
-            const now = new Date(); const hour = now.getHours(); const dayIndex = now.getDay();
-            let timeGreeting = "أهلاً يا أميرتي! 💖", actionText = "", timeIcon = "☀️";
-            const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-            
-            if (hour >= 5 && hour < 12) { timeGreeting = "صباح الخير يا بطلة!"; actionText = "شربتي حليبك؟"; timeIcon = "☀️"; } 
-            else if (hour >= 12 && hour < 16) { timeGreeting = "نهارك سعيد يا حلوة!"; actionText = "كيف روضة يسعور؟"; timeIcon = "🌤️"; } 
-            else if (hour >= 16 && hour < 20) { timeGreeting = "مساء الخير يا حلوة!"; actionText = "يلا نلعب بالباربي!"; timeIcon = "🌇"; } 
-            else { timeGreeting = "تصبحي على خير!"; actionText = "أحلام سعيدة."; timeIcon = "🌙"; }
-            
-            let dayText = `اليوم ${days[dayIndex]} - ${actionText}`;
-            if(dayIndex === 5) dayText = "جمعة مباركة 🕌";
-            if(dayIndex === 6) dayText = "عطلة مع البابا 🎉";
-            
-            document.getElementById('dynamic-greeting').innerText = timeGreeting;
-            document.getElementById('dynamic-day').innerText = dayText;
-            document.getElementById('time-icon').innerText = timeIcon;
+        // --- 20 سلوجان متغير ذكي (تحت اللوجو) ---
+        const smartSlogans = [
+            "أشطر وأحلى بنت في روضة يسعور! 👑",
+            "نورتي التطبيق يا أميرتي جواهر 💖",
+            "يلا نلعب ونتعلم مع البابا شريف ✨",
+            "عالمك الخاص مليان مفاجآت 🎁",
+            "الفراولة بتستناكي يا حلوة 🍓",
+            "جاهزة لتحديات اليوم؟ 🚀",
+            "الباربي مشتاقتلك يا أميرة 👗",
+            "كل يوم بتكبري وبتصيري أشطر 🌟",
+            "البابا شريف فخور فيكي دايماً 🥰",
+            "ابتسامتك بتضوي دنيتنا ☀️",
+            "وقت اللعب والمرح بلّش هسا! 🎨",
+            "ألوانك المفضلة بتستناكي ترسمي 🎀",
+            "إنتي أحلى من كل الفواكه 🥭",
+            "يلا نجمع نجوم قد السما ⭐",
+            "روضة يسعور بتفتخر فيكي 🏫",
+            "أميرة الألعاب والذكاء 🧩",
+            "الشنيتسل الزاكي لعيونك 🍗",
+            "أحلى الأوقات مع بابا شريف 👨‍👧",
+            "إنتي بطلة التحديات بلا منازع 🏆",
+            "عالم جواهر السحري بيرحب فيكي 🦄"
+        ];
+
+        function changeSlogan() {
+            const rSlogan = smartSlogans[Math.floor(Math.random() * smartSlogans.length)];
+            const el = document.getElementById('dynamic-slogan');
+            if(el) el.innerText = rSlogan;
+        }
+        setInterval(changeSlogan, 10000); // تغيير كل 10 ثواني كنوع من الحركة
+
+        // --- تهيئة مهام جواهر مع ميزة الختم ---
+        function renderTasks() {
+            const container = document.getElementById('tasks-container');
+            container.innerHTML = '';
+            dailyTasks.forEach(task => {
+                container.innerHTML += `
+                <div class="task-item glass-card p-3 rounded-2xl transition-all mb-2" id="task-box-${task.id}">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" class="w-6 h-6 rounded text-jawaher-dark-pink border-[#EAE1D1] focus:ring-0 bg-[#FCF9F2]" onchange="handleTaskCheck(this, ${task.id}, '${task.msg}')">
+                        <span class="text-lg font-bold text-soft-text">${task.text}</span>
+                    </label>
+                    <div id="upload-area-${task.id}" class="hidden mt-3 pl-8 flex-col gap-2 transition-all">
+                        <input type="file" accept="image/*" id="file-${task.id}" class="hidden" onchange="applyImageAndBadge(this, 'preview-img-${task.id}', 'badge-${task.id}')">
+                        <button id="btn-upload-${task.id}" onclick="document.getElementById('file-${task.id}').click()" class="bg-[#E2ACB8] text-white px-3 py-2 rounded-xl text-sm font-bold shadow-sm w-max wiggle-hover">
+                            📷 صوري الإنجاز!
+                        </button>
+                        
+                        <div id="img-container-${task.id}" class="hidden relative inline-block mt-2 w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-sm border-4 border-white overflow-hidden">
+                            <img id="preview-img-${task.id}" class="w-full h-full object-cover">
+                            <div id="badge-${task.id}" class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded-xl text-lg font-bold shadow-sm flex items-center gap-1 transform rotate-[-8deg] border border-[#F8D8E3] text-jawaher-dark-pink">
+                                ⭐ ممتازة!
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
         }
 
-        // --- وضع حماية العين ---
+        // --- وضع حماية العين المطور ---
         function toggleEyeCare() {
             document.body.classList.toggle('eye-care-mode');
             const btn = document.getElementById('eye-btn');
             if(document.body.classList.contains('eye-care-mode')) {
                 btn.classList.add('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
-                btn.classList.remove('bg-jawaher-purple', 'text-[#9086A8]', 'border-white');
+                btn.classList.remove('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
                 speakWord('وضع الراحة');
             } else {
                 btn.classList.remove('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
-                btn.classList.add('bg-jawaher-purple', 'text-[#9086A8]', 'border-white');
+                btn.classList.add('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
                 speakWord('الوضع العادي');
             }
         }
@@ -542,17 +529,21 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'ar-SA'; utterance.rate = 0.85; utterance.pitch = 1.1; utterance.volume = 0.8; 
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85; 
+                utterance.pitch = 1.1; 
+                utterance.volume = 0.8; 
                 window.speechSynthesis.speak(utterance);
             }
         }
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function startAppWithVoice() {
-            document.getElementById('welcome-overlay').classList.add('hide-welcome');
+            document.getElementById('welcome-overlay').classList.add('hide-screen');
             if(audioCtx.state === 'suspended') audioCtx.resume();
             if('speechSynthesis' in window) window.speechSynthesis.getVoices();
             
+            // طقس الصباح زي ما طلبت من قبل 5 الصبح
             const hour = new Date().getHours();
             if(hour >= 0 && hour < 5) {
                 setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، الجو بارد شوي، البسي أواعيكي الدافية عشان ما تمرضي!"); }, 300);
@@ -560,6 +551,8 @@
                 setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، نورتي التطبيق!"); }, 300);
             }
             triggerReward('✨', 20);
+            updateTopCenterGreeting();
+            changeSlogan();
         }
 
         // --- نظام النجوم ---
@@ -578,24 +571,35 @@
         function triggerReward(emojiType, amount = 15) {
             for (let i = 0; i < amount; i++) {
                 const confetti = document.createElement('div');
-                confetti.classList.add('confetti-piece'); confetti.innerText = emojiType;
-                confetti.style.left = Math.random() * 100 + 'vw'; confetti.style.fontSize = (Math.random() * 15 + 15) + 'px';
-                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's'; confetti.style.animationDelay = (Math.random() * 0.5) + 's';
-                confetti.style.opacity = '0.7'; document.body.appendChild(confetti);
+                confetti.classList.add('confetti-piece');
+                confetti.innerText = emojiType;
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                confetti.style.opacity = '0.7'; 
+                document.body.appendChild(confetti);
                 setTimeout(() => { confetti.remove(); }, 5000);
             }
         }
 
-        function handleTaskCheck(checkbox, uploadDivId, msg) {
-            const uploadDiv = document.getElementById(uploadDivId);
-            const taskBox = checkbox.closest('.task-item');
+        function handleTaskCheck(checkbox, id, msg) {
+            const uploadArea = document.getElementById(`upload-area-${id}`);
+            const taskBox = document.getElementById(`task-box-${id}`);
+            
             if(checkbox.checked) {
-                uploadDiv.classList.remove('hidden'); uploadDiv.classList.add('flex');
-                taskBox.classList.add('bg-[#F0F8F1]', 'border-[#CDE5D0]'); taskBox.classList.remove('bg-white');
-                addStar(2); speakWord(msg); triggerReward('🎉', 10);
+                uploadArea.classList.remove('hidden');
+                uploadArea.classList.add('flex');
+                taskBox.classList.add('bg-[#F0F5EC]', 'border-[#C2DDBF]'); 
+                taskBox.classList.remove('bg-[#FCF9F2]', 'border-[#EAE1D1]');
+                addStar(2); 
+                speakWord(msg);
+                triggerReward('🎉', 10);
             } else {
-                uploadDiv.classList.add('hidden'); uploadDiv.classList.remove('flex');
-                taskBox.classList.remove('bg-[#F0F8F1]', 'border-[#CDE5D0]'); taskBox.classList.add('bg-white');
+                uploadArea.classList.add('hidden');
+                uploadArea.classList.remove('flex');
+                taskBox.classList.remove('bg-[#F0F5EC]', 'border-[#C2DDBF]');
+                taskBox.classList.add('bg-[#FCF9F2]', 'border-[#EAE1D1]');
             }
         }
 
@@ -603,17 +607,34 @@
             if (inputElement.files && inputElement.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); const img = new Image();
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    
                     img.onload = function() {
-                        const size = Math.min(img.width, img.height); canvas.width = size; canvas.height = size;
-                        const startX = (img.width - size) / 2; const startY = (img.height - size) / 2;
+                        const size = Math.min(img.width, img.height);
+                        canvas.width = size;
+                        canvas.height = size;
+                        const startX = (img.width - size) / 2;
+                        const startY = (img.height - size) / 2;
                         ctx.drawImage(img, startX, startY, size, size, 0, 0, size, size);
                         
-                        const badgeText = document.getElementById(badgeId).innerText;
-                        ctx.save(); ctx.translate(size - size*0.4, size - size*0.15); ctx.rotate(-10 * Math.PI / 180);
-                        ctx.fillStyle = "rgba(255, 255, 255, 0.9)"; ctx.beginPath();
-                        ctx.roundRect(-size*0.05, -size*0.1, size*0.5, size*0.15, size*0.05); ctx.fill();
-                        ctx.font = `bold ${size*0.06}px Tajawal, sans-serif`; ctx.fillStyle = "#DF85A3"; ctx.fillText(badgeText, 0, 0); ctx.restore();
+                        const badges = ["⭐ ممتازة!", "💖 بطلة!", "👑 أميرة!"];
+                        const randomBadge = badges[Math.floor(Math.random() * badges.length)];
+                        
+                        ctx.save();
+                        ctx.translate(size - size*0.35, size - size*0.15); 
+                        ctx.rotate(-10 * Math.PI / 180);
+                        
+                        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+                        ctx.beginPath();
+                        ctx.roundRect(-size*0.05, -size*0.1, size*0.4, size*0.15, size*0.05); 
+                        ctx.fill();
+                        
+                        ctx.font = `bold ${size*0.07}px Tajawal, sans-serif`;
+                        ctx.fillStyle = "#DF85A3";
+                        ctx.fillText(randomBadge, 0, 0);
+                        ctx.restore();
 
                         const finalImageURL = canvas.toDataURL("image/jpeg");
                         const finalImgElement = document.getElementById(imgId);
@@ -623,12 +644,14 @@
                         finalImgElement.parentElement.classList.remove('hidden');
                         
                         const btn = inputElement.nextElementSibling;
-                        btn.innerText = "اضغطي مطولاً ع الصورة لحفظها بالاستوديو ⬇️";
-                        btn.classList.replace('bg-[#F4D8DF]', 'bg-[#FCF9F2]');
-                        btn.classList.replace('text-[#C26B85]', 'text-soft-text');
+                        btn.innerText = "اضغطي مطولاً ع الصورة لحفظها ⬇️";
+                        btn.classList.replace('bg-jawaher-pink', 'bg-[#F4EFE6]');
+                        btn.classList.replace('text-white', 'text-soft-text');
                         btn.onclick = null; 
                         
-                        triggerReward('💖', 30); addStar(5); speakWord('يا عيني على الحلوين'); showSweetMessage('بتجنني يا أميرتي! 💖');
+                        triggerReward('💖', 30);
+                        addStar(5);
+                        speakWord('يا عيني على الحلوين');
                     }
                     img.src = e.target.result;
                 }
@@ -636,19 +659,39 @@
             }
         }
 
-        function showSweetMessage(text) {
-            const box = document.getElementById('surprise-box');
-            box.innerText = text; box.classList.remove('hidden');
-            setTimeout(() => box.classList.add('hidden'), 3500);
+        // --- الترحيب الدائم في الوسط ---
+        function updateTopCenterGreeting() {
+            const now = new Date();
+            const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+            const dayName = days[now.getDay()];
+            const hour = now.getHours();
+            
+            let timeText = "";
+            if (hour >= 5 && hour < 12) timeText = "صباح الخير يا قمر ☀️";
+            else if (hour >= 12 && hour < 16) timeText = "نهارك سعيد يا حلوة 🌸";
+            else if (hour >= 16 && hour < 20) timeText = "مساء الخير يا بطلة 🌇";
+            else timeText = "تصبحي على خير 🌙";
+
+            const greetingStr = `${dayName} - ${timeText}`;
+            document.getElementById('center-day-time').innerText = greetingStr;
+            
+            document.getElementById('dynamic-greeting').innerText = "أهلاً يا أميرتي! 💖";
+            document.getElementById('dynamic-day').innerText = "أشطر بنت في يسعور!";
+            if (hour >= 5 && hour < 12) document.getElementById('time-icon').innerText = "☀️";
+            else if (hour >= 12 && hour < 16) document.getElementById('time-icon').innerText = "🌤️";
+            else if (hour >= 16 && hour < 20) document.getElementById('time-icon').innerText = "🌇";
+            else document.getElementById('time-icon').innerText = "🌙";
         }
+        setInterval(updateTopCenterGreeting, 60000); 
 
         // --- وظائف التنقل ---
         function switchView(viewId, btnElement) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.remove('text-[#D67D98]'); });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             btnElement.classList.add('active');
-            btnElement.classList.add('text-[#D67D98]');
             
             if(viewId === 'view-draw') { setTimeout(resizeCanvas, 100); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -658,20 +701,19 @@
             document.querySelectorAll('.game-container').forEach(el => el.classList.add('hidden'));
             document.getElementById(gameId).classList.remove('hidden');
             document.querySelectorAll('.game-tab-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-[#EAF6F5]', 'text-[#4A9994]', 'bg-jawaher-yellow', 'text-[#A39459]', 'bg-[#DDECDA]', 'text-[#6D936F]', 'bg-[#F0D5E1]', 'text-[#B87A96]', 'bg-jawaher-purple', 'text-[#9086A8]', 'bg-jawaher-pink', 'text-[#B87C8B]');
-                btn.classList.add('bg-white', 'text-gray-400'); 
+                btn.classList.remove('active', 'bg-[#F9F1D8]', 'text-[#A88B35]', 'bg-[#E8F5E9]', 'text-[#5C9E60]', 'bg-[#FDE2ED]', 'text-[#C46A88]', 'bg-jawaher-purple', 'text-[#9086A8]', 'bg-jawaher-pink', 'text-[#C96B8A]', 'bg-[#EAF6F5]', 'text-[#55A49F]');
+                btn.classList.add('bg-[#FCF9F2]', 'text-[#A8A09B]'); 
             });
             
-            event.target.classList.remove('bg-white', 'text-gray-400'); event.target.classList.add('active');
-            if(gameId.includes('addition')) event.target.classList.add('bg-[#EAF6F5]', 'text-[#4A9994]');
+            event.target.classList.remove('bg-[#FCF9F2]', 'text-[#A8A09B]');
+            event.target.classList.add('active');
             if(gameId.includes('math')) event.target.classList.add('bg-jawaher-yellow', 'text-[#A39459]');
-            if(gameId.includes('bigger')) event.target.classList.add('bg-[#DDECDA]', 'text-[#6D936F]');
-            if(gameId.includes('missing')) event.target.classList.add('bg-[#F0D5E1]', 'text-[#B87A96]');
+            if(gameId.includes('bigger')) event.target.classList.add('bg-[#E8F5E9]', 'text-[#5C9E60]');
+            if(gameId.includes('missing')) event.target.classList.add('bg-[#FDE2ED]', 'text-[#C46A88]');
             if(gameId.includes('memory')) event.target.classList.add('bg-jawaher-purple', 'text-[#9086A8]');
-            if(gameId.includes('balloons')) event.target.classList.add('bg-jawaher-pink', 'text-[#B87C8B]');
-            if(gameId.includes('piano')) event.target.classList.add('bg-gray-100', 'text-gray-500');
+            if(gameId.includes('balloons')) event.target.classList.add('bg-jawaher-pink', 'text-[#C96B8A]');
+            if(gameId.includes('piano')) event.target.classList.add('bg-[#EAF6F5]', 'text-[#55A49F]');
             
-            if(gameId === 'game-addition') startAdditionExam();
             if(gameId === 'game-math') startMathExam();
             if(gameId === 'game-bigger') startBiggerExam();
             if(gameId === 'game-missing') startMissingExam();
@@ -681,11 +723,10 @@
 
         // ================= التحديات والألغاز ================= //
         
-        let examStates = { 
-            addition: { q: 1, score: 0, total: 10, ans: 0 },
-            math: { q: 1, score: 0, total: 10, target: 0, fruit: '' }, 
-            bigger: { q: 1, score: 0, total: 10, ans: 0 }, 
-            missing: { q: 1, score: 0, total: 10, ans: 0 } 
+        let examStates = {
+            math: { q: 1, score: 0, total: 10, target: 0, fruit: '' },
+            bigger: { q: 1, score: 0, total: 10, ans: 0 },
+            missing: { q: 1, score: 0, total: 10, ans: 0 }
         };
 
         function showChallengeResult(type, score, total) {
@@ -693,6 +734,7 @@
             document.getElementById(`${type}-result-area`).classList.remove('hidden');
             document.getElementById(`${type}-result-area`).classList.add('flex');
             document.getElementById(`${type}-final-score`).innerText = score;
+            
             let msg = '';
             if(score === 10) { msg = 'ممتازة! كل الألغاز صح!'; triggerReward('🏆', 25); addStar(10); speakWord('رائعة جداً'); }
             else if(score >= 7) { msg = 'بطلة يسعور! نتيجة بتجنن!'; triggerReward('🌟', 15); addStar(5); speakWord('بطلة'); }
@@ -700,115 +742,198 @@
             document.getElementById(`${type}-final-msg`).innerText = msg;
         }
 
-        // 1. تحدي الجمع ➕
-        function startAdditionExam() { examStates.addition = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('addition-play-area').classList.remove('hidden'); document.getElementById('addition-result-area').classList.add('hidden'); document.getElementById('addition-result-area').classList.remove('flex'); nextAdditionQuestion(); }
-        function nextAdditionQuestion() {
-            if(examStates.addition.q > examStates.addition.total) { showChallengeResult('addition', examStates.addition.score, examStates.addition.total); return; }
-            document.getElementById('addition-status').innerText = `التحدي ${examStates.addition.q} من ${examStates.addition.total}`; 
-            document.getElementById('addition-progress').style.width = `${(examStates.addition.q / examStates.addition.total) * 100}%`; 
-            document.getElementById('addition-feedback').innerText = '';
-            
-            let num1 = Math.floor(Math.random() * 5) + 1; 
-            let num2 = Math.floor(Math.random() * 5) + 1;
-            examStates.addition.ans = num1 + num2;
-            
-            document.getElementById('add-num1').innerText = num1;
-            document.getElementById('add-num2').innerText = num2;
-            
-            let options = [examStates.addition.ans]; 
-            while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w)) options.push(w); } 
-            options.sort(() => Math.random() - 0.5);
-            let optionsHtml = ''; options.forEach(opt => { optionsHtml += `<button onclick="checkAdditionAns(${opt})" class="bg-white text-[#4A9994] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#C9EAE7] active:translate-y-1 transition mx-auto">${opt}</button>`; });
-            document.getElementById('addition-options').innerHTML = optionsHtml;
+        // 1. تحدي العد
+        function startMathExam() {
+            examStates.math = { q: 1, score: 0, total: 10, target: 0, fruit: '' };
+            document.getElementById('math-play-area').classList.remove('hidden');
+            document.getElementById('math-result-area').classList.add('hidden');
+            document.getElementById('math-result-area').classList.remove('flex');
+            nextMathQuestion();
         }
-        function checkAdditionAns(ans) {
-            const res = document.getElementById('addition-feedback');
-            if(ans === examStates.addition.ans) { res.innerText = 'صح! بطلة بالحساب 👏'; res.className = 'text-lg font-bold h-8 text-[#7BC4BF] bounce-slow'; speakWord('صح'); examStates.addition.score++; triggerReward('🎓', 2); } 
-            else { res.innerText = 'لأ.. جربي كمان 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.addition.q++; setTimeout(nextAdditionQuestion, 1500);
-        }
-
-        // 2. تحدي العد
-        function startMathExam() { examStates.math = { q: 1, score: 0, total: 10, target: 0, fruit: '' }; document.getElementById('math-play-area').classList.remove('hidden'); document.getElementById('math-result-area').classList.add('hidden'); document.getElementById('math-result-area').classList.remove('flex'); nextMathQuestion(); }
         function nextMathQuestion() {
             if(examStates.math.q > examStates.math.total) { showChallengeResult('math', examStates.math.score, examStates.math.total); return; }
-            document.getElementById('math-status').innerText = `التحدي ${examStates.math.q} من ${examStates.math.total}`; document.getElementById('math-progress').style.width = `${(examStates.math.q / examStates.math.total) * 100}%`; document.getElementById('math-feedback').innerText = '';
-            const fruits = ['🍓', '🥭', '🍊', '🍍', '🍎', '🍐']; examStates.math.fruit = fruits[Math.floor(Math.random() * fruits.length)]; examStates.math.target = Math.floor(Math.random() * 10) + 1;
-            let fruitHtml = ''; for(let i = 0; i < examStates.math.target; i++) fruitHtml += `<span class="bounce-slow text-4xl" style="animation-delay: ${i*0.1}s">${examStates.math.fruit}</span>`;
+            document.getElementById('math-status').innerText = `التحدي ${examStates.math.q} من ${examStates.math.total}`;
+            document.getElementById('math-progress').style.width = `${(examStates.math.q / examStates.math.total) * 100}%`;
+            document.getElementById('math-feedback').innerText = '';
+
+            const fruits = ['🍓', '🥭', '🍊', '🍍', '🍎', '🍐'];
+            examStates.math.fruit = fruits[Math.floor(Math.random() * fruits.length)];
+            examStates.math.target = Math.floor(Math.random() * 10) + 1;
+            
+            let fruitHtml = '';
+            for(let i = 0; i < examStates.math.target; i++) fruitHtml += `<span class="bounce-slow text-4xl" style="animation-delay: ${i*0.1}s">${examStates.math.fruit}</span>`;
             document.getElementById('fruit-container').innerHTML = fruitHtml;
-            let options = [examStates.math.target]; while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w)) options.push(w); } options.sort(() => Math.random() - 0.5);
-            let optionsHtml = ''; options.forEach(opt => { optionsHtml += `<button onclick="checkMathAns(${opt})" class="bg-[#FCF9F2] text-[#A39459] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E5D8A5] active:translate-y-1 transition mx-auto">${opt}</button>`; });
+
+            let options = [examStates.math.target];
+            while(options.length < 3) { 
+                let w = Math.floor(Math.random() * 10) + 1; 
+                if(!options.includes(w)) options.push(w); 
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            let optionsHtml = '';
+            options.forEach(opt => { optionsHtml += `<button onclick="checkMathAns(${opt})" class="bg-[#FCF9F2] text-[#A39459] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E5D8A5] active:translate-y-1 transition mx-auto">${opt}</button>`; });
             document.getElementById('math-options').innerHTML = optionsHtml;
         }
         function checkMathAns(ans) {
             const res = document.getElementById('math-feedback');
-            if(ans === examStates.math.target) { res.innerText = 'صح! بطلة 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('صح'); examStates.math.score++; triggerReward(examStates.math.fruit, 2); } 
-            else { res.innerText = 'لأ.. ركزي يا حلوة 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.math.q++; setTimeout(nextMathQuestion, 1500);
+            if(ans === examStates.math.target) {
+                res.innerText = 'صح! بطلة 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow';
+                speakWord('صح'); examStates.math.score++; triggerReward(examStates.math.fruit, 2);
+            } else {
+                res.innerText = 'لأ.. ركزي يا حلوة 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان');
+            }
+            examStates.math.q++;
+            setTimeout(nextMathQuestion, 1500);
         }
 
-        // 3. الرقم الأكبر
-        function startBiggerExam() { examStates.bigger = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('bigger-play-area').classList.remove('hidden'); document.getElementById('bigger-result-area').classList.add('hidden'); document.getElementById('bigger-result-area').classList.remove('flex'); nextBiggerQuestion(); }
+        // 2. تحدي الرقم الأكبر
+        function startBiggerExam() {
+            examStates.bigger = { q: 1, score: 0, total: 10, ans: 0 };
+            document.getElementById('bigger-play-area').classList.remove('hidden');
+            document.getElementById('bigger-result-area').classList.add('hidden');
+            document.getElementById('bigger-result-area').classList.remove('flex');
+            nextBiggerQuestion();
+        }
         function nextBiggerQuestion() {
             if(examStates.bigger.q > examStates.bigger.total) { showChallengeResult('bigger', examStates.bigger.score, examStates.bigger.total); return; }
-            document.getElementById('bigger-status').innerText = `التحدي ${examStates.bigger.q} من ${examStates.bigger.total}`; document.getElementById('bigger-progress').style.width = `${(examStates.bigger.q / examStates.bigger.total) * 100}%`; document.getElementById('bigger-feedback').innerText = '';
-            let num1 = Math.floor(Math.random() * 10) + 1, num2 = Math.floor(Math.random() * 10) + 1; while(num1 === num2) num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('bigger-status').innerText = `التحدي ${examStates.bigger.q} من ${examStates.bigger.total}`;
+            document.getElementById('bigger-progress').style.width = `${(examStates.bigger.q / examStates.bigger.total) * 100}%`;
+            document.getElementById('bigger-feedback').innerText = '';
+
+            let num1 = Math.floor(Math.random() * 10) + 1;
+            let num2 = Math.floor(Math.random() * 10) + 1;
+            while(num1 === num2) num2 = Math.floor(Math.random() * 10) + 1;
+
             examStates.bigger.ans = num1 > num2 ? 1 : 2;
-            document.getElementById('bigger-opt-1').innerText = num1; document.getElementById('bigger-opt-2').innerText = num2;
+
+            document.getElementById('bigger-opt-1').innerText = num1;
+            document.getElementById('bigger-opt-2').innerText = num2;
         }
         function checkBiggerExam(choice) {
             const res = document.getElementById('bigger-feedback');
-            if(choice === examStates.bigger.ans) { res.innerText = 'صح! إنتي الأشطر 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('شاطرة'); examStates.bigger.score++; triggerReward('🌟', 2); } 
-            else { res.innerText = 'أوبس! الرقم الثاني أكبر 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('انتبهي'); }
-            examStates.bigger.q++; setTimeout(nextBiggerQuestion, 1500);
+            if(choice === examStates.bigger.ans) {
+                res.innerText = 'صح! إنتي الأشطر 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow';
+                speakWord('شاطرة'); examStates.bigger.score++; triggerReward('🌟', 2);
+            } else {
+                res.innerText = 'أوبس! الرقم الثاني أكبر 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('انتبهي');
+            }
+            examStates.bigger.q++;
+            setTimeout(nextBiggerQuestion, 1500);
         }
 
-        // 4. الرقم الناقص
-        function startMissingExam() { examStates.missing = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('missing-play-area').classList.remove('hidden'); document.getElementById('missing-result-area').classList.add('hidden'); document.getElementById('missing-result-area').classList.remove('flex'); nextMissingQuestion(); }
+        // 3. تحدي الرقم الناقص
+        function startMissingExam() {
+            examStates.missing = { q: 1, score: 0, total: 10, ans: 0 };
+            document.getElementById('missing-play-area').classList.remove('hidden');
+            document.getElementById('missing-result-area').classList.add('hidden');
+            document.getElementById('missing-result-area').classList.remove('flex');
+            nextMissingQuestion();
+        }
         function nextMissingQuestion() {
             if(examStates.missing.q > examStates.missing.total) { showChallengeResult('missing', examStates.missing.score, examStates.missing.total); return; }
-            document.getElementById('missing-status').innerText = `اللغز ${examStates.missing.q} من ${examStates.missing.total}`; document.getElementById('missing-progress').style.width = `${(examStates.missing.q / examStates.missing.total) * 100}%`; document.getElementById('missing-feedback').innerText = '';
-            let startNum = Math.floor(Math.random() * 8) + 1, seq = [startNum, startNum + 1, startNum + 2], missingIndex = Math.floor(Math.random() * 3);
-            examStates.missing.ans = seq[missingIndex]; seq[missingIndex] = '?';
-            let seqHtml = ''; seq.forEach(n => { let boxClass = n === '?' ? 'bg-[#F0D5E1] text-[#B87A96] border-[#E6C1CF] border-2 animate-pulse' : 'bg-[#FCF9F2] text-soft-text border-[#EAE1D1] border-2'; seqHtml += `<div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold shadow-sm ${boxClass}">${n}</div>`; });
+            document.getElementById('missing-status').innerText = `اللغز ${examStates.missing.q} من ${examStates.missing.total}`;
+            document.getElementById('missing-progress').style.width = `${(examStates.missing.q / examStates.missing.total) * 100}%`;
+            document.getElementById('missing-feedback').innerText = '';
+
+            let startNum = Math.floor(Math.random() * 8) + 1;
+            let seq = [startNum, startNum + 1, startNum + 2];
+            
+            let missingIndex = Math.floor(Math.random() * 3);
+            examStates.missing.ans = seq[missingIndex];
+            seq[missingIndex] = '?';
+
+            let seqHtml = '';
+            seq.forEach(n => {
+                let boxClass = n === '?' ? 'bg-[#F0D5E1] text-[#B87A96] border-[#E6C1CF] border-2 animate-pulse' : 'bg-[#FCF9F2] text-soft-text border-[#EAE1D1] border-2';
+                seqHtml += `<div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold shadow-sm ${boxClass}">${n}</div>`;
+            });
             document.getElementById('missing-sequence').innerHTML = seqHtml;
-            let options = [examStates.missing.ans]; while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w) && w !== examStates.missing.ans) options.push(w); } options.sort(() => Math.random() - 0.5);
-            let optionsHtml = ''; options.forEach(opt => { optionsHtml += `<button onclick="checkMissingAns(${opt})" class="bg-[#FCF9F2] text-[#B87A96] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E6C1CF] active:translate-y-1 transition mx-auto">${opt}</button>`; });
+
+            let options = [examStates.missing.ans];
+            while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w) && w !== examStates.missing.ans) options.push(w); }
+            options.sort(() => Math.random() - 0.5);
+
+            let optionsHtml = '';
+            options.forEach(opt => { optionsHtml += `<button onclick="checkMissingAns(${opt})" class="bg-[#FCF9F2] text-[#B87A96] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E6C1CF] active:translate-y-1 transition mx-auto">${opt}</button>`; });
             document.getElementById('missing-options').innerHTML = optionsHtml;
         }
         function checkMissingAns(ans) {
             const res = document.getElementById('missing-feedback');
-            if(ans === examStates.missing.ans) { res.innerText = 'صح! تسلسل ممتاز 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('ممتازة'); examStates.missing.score++; triggerReward('🔢', 2); } 
-            else { res.innerText = 'رقم غلط.. ركزي 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.missing.q++; setTimeout(nextMissingQuestion, 1500);
+            if(ans === examStates.missing.ans) {
+                res.innerText = 'صح! تسلسل ممتاز 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow';
+                speakWord('ممتازة'); examStates.missing.score++; triggerReward('🔢', 2);
+            } else {
+                res.innerText = 'رقم غلط.. ركزي 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان');
+            }
+            examStates.missing.q++;
+            setTimeout(nextMissingQuestion, 1500);
         }
 
         // ================= الألعاب الترفيهية ================= //
         function playTone(frequency, keyElement) {
             if (audioCtx.state === 'suspended') audioCtx.resume(); 
-            const oscillator = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
-            oscillator.type = 'sine'; oscillator.frequency.value = frequency; oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
-            oscillator.start(); gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1); oscillator.stop(audioCtx.currentTime + 1);
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sine'; 
+            oscillator.frequency.value = frequency;
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
+            oscillator.stop(audioCtx.currentTime + 1);
             keyElement.style.opacity = '0.7'; setTimeout(() => keyElement.style.opacity = '1', 150);
         }
 
+        // 🎈 لعبة البالونات
         let balloonInterval;
-        function resetBalloons() { document.getElementById('balloon-area').innerHTML = ''; document.getElementById('btn-start-balloons').classList.remove('hidden'); clearInterval(balloonInterval); }
+        function resetBalloons() { 
+            document.getElementById('balloon-area').innerHTML = ''; 
+            document.getElementById('btn-start-balloons').classList.remove('hidden'); 
+            clearInterval(balloonInterval); 
+        }
         function startBalloons() {
-            document.getElementById('btn-start-balloons').classList.add('hidden'); document.getElementById('balloon-area').classList.remove('pointer-events-none');
-            const goodEmojis = ['🎈', '🎈', '🎈']; const badEmojis = ['🌵', '🐝', '🌩️']; let count = 0;
+            document.getElementById('btn-start-balloons').classList.add('hidden');
+            document.getElementById('balloon-area').classList.remove('pointer-events-none');
+            
+            const goodEmojis = ['🎈', '🎈', '🎈']; 
+            const badEmojis = ['🌵', '🐝', '🌩️']; 
+            let count = 0;
+            
             balloonInterval = setInterval(() => {
                 if(count > 25) { clearInterval(balloonInterval); setTimeout(resetBalloons, 3000); return; }
-                const isGood = Math.random() > 0.35; const b = document.createElement('div'); b.classList.add('balloon'); 
-                if (isGood) { b.innerText = goodEmojis[0]; b.dataset.type = 'good'; } else { b.innerText = badEmojis[Math.floor(Math.random() * badEmojis.length)]; b.dataset.type = 'bad'; }
-                b.style.left = Math.random() * 80 + '%'; b.style.animationDuration = (Math.random() * 3 + 4) + 's'; 
+                
+                const isGood = Math.random() > 0.35; 
+                const b = document.createElement('div'); 
+                b.classList.add('balloon'); 
+                
+                if (isGood) {
+                    b.innerText = goodEmojis[0];
+                    b.dataset.type = 'good';
+                } else {
+                    b.innerText = badEmojis[Math.floor(Math.random() * badEmojis.length)];
+                    b.dataset.type = 'bad';
+                }
+                
+                b.style.left = Math.random() * 80 + '%'; 
+                b.style.animationDuration = (Math.random() * 3 + 4) + 's'; 
+                
                 b.onmousedown = b.ontouchstart = function(e) { 
                     e.preventDefault(); 
-                    if(this.dataset.type === 'good') { triggerReward('✨', 2); addStar(1); speakWord('بوپ'); } 
-                    else { addStar(-1); speakWord('ديري بالك'); this.classList.add('bad-item-hit'); }
+                    if(this.dataset.type === 'good') {
+                        triggerReward('✨', 2); 
+                        addStar(1); 
+                        speakWord('بوپ'); 
+                    } else {
+                        addStar(-1); 
+                        speakWord('ديري بالك');
+                        this.classList.add('bad-item-hit'); 
+                    }
                     setTimeout(() => this.remove(), this.dataset.type === 'bad' ? 300 : 0);
                 };
-                document.getElementById('balloon-area').appendChild(b); count++;
+                
+                document.getElementById('balloon-area').appendChild(b); 
+                count++;
             }, 900);
         }
 
@@ -826,27 +951,31 @@
                     </div></div>`;
             });
         }
+        
         function flipMemoryCard(card) {
             if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
-            card.classList.add('flipped'); if (!hasFlippedCard) { hasFlippedCard = true; firstCard = card; return; } secondCard = card; checkForMatch();
+            card.classList.add('flipped');
+            if (!hasFlippedCard) { hasFlippedCard = true; firstCard = card; return; }
+            secondCard = card; checkForMatch();
         }
+        
         function checkForMatch() {
             if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
                 firstCard.classList.add('matched'); secondCard.classList.add('matched'); matchedPairs++; addStar(2); speakWord('صح');
-                if (matchedPairs === 8) setTimeout(() => { triggerReward('🏆', 25); speakWord('ممتاز'); showSweetMessage('خلصتي اللوحة يا بطلة!'); addStar(5); }, 500); resetBoard();
+                if (matchedPairs === 8) setTimeout(() => { triggerReward('🏆', 25); speakWord('ممتاز'); showSweetMessage('خلصتي اللوحة يا بطلة!'); addStar(5); }, 500);
+                resetBoard();
             } else { lockBoard = true; setTimeout(() => { firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); resetBoard(); }, 1200); }
         }
         function resetBoard() { [hasFlippedCard, lockBoard] = [false, false]; [firstCard, secondCard] = [null, null]; }
 
-        // ================= الأقسام المنفصلة (أشغال، فيديوهات، بطاقات) ================= //
-        
+        // ================= وظائف الأقسام (فيديو، بطاقات، أشغال، رسم) ================= //
         function renderVideos() {
             const videoContainer = document.getElementById('videos-container'); videoContainer.innerHTML = '';
             educationalVideos.forEach(vid => {
                 let embedUrl = vid.url;
                 if(embedUrl.includes('watch?v=')) embedUrl = embedUrl.replace('watch?v=', 'embed/').split('&')[0];
                 if(embedUrl.includes('youtu.be/')) embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
-                videoContainer.innerHTML += `<div class="glass-card rounded-2xl overflow-hidden border border-[#F4D8DF]"><div class="aspect-video relative bg-[#F5F2EB]"><iframe class="w-full h-full absolute top-0 left-0" src="${embedUrl}" title="${vid.title}" frameborder="0" allowfullscreen></iframe></div><div class="p-3 text-center"><h3 class="font-bold text-lg text-soft-text font-kids">${vid.title}</h3></div></div>`;
+                videoContainer.innerHTML += `<div class="glass-card rounded-2xl overflow-hidden border border-[#E2ACB8]"><div class="aspect-video relative bg-[#F4EFE6]"><iframe class="w-full h-full absolute top-0 left-0" src="${embedUrl}" title="${vid.title}" frameborder="0" allowfullscreen></iframe></div><div class="p-4 text-center"><h3 class="font-bold text-xl text-soft-text font-kids">${vid.title}</h3></div></div>`;
             });
         }
 
@@ -854,6 +983,7 @@
             const craftsContainer = document.getElementById('handicrafts-container'); craftsContainer.innerHTML = '';
             myHandicrafts.forEach((craft, index) => {
                 craftsContainer.innerHTML += `<div class="glass-card rounded-xl overflow-hidden shadow-sm border border-[#EAE1D1] aspect-square cursor-pointer" onclick="openPhotoModal('${craft.url}')">
+                    <!-- الصورة بتنقرأ من مجلد images اللي عندك -->
                     <img src="${craft.url}" class="w-full h-full object-cover wiggle-hover" onerror="this.onerror=null; this.src='https://placehold.co/600x600/F5F2EB/5A504E?text=صورة+${index+1}'">
                     <div class="bg-white text-center p-1 text-xs font-bold text-soft-text border-t border-[#EAE1D1]">${craft.title}</div>
                 </div>`;
@@ -884,14 +1014,14 @@
         function renderFlashcards() {
             const container = document.getElementById('flashcards-container'); container.innerHTML = '';
             flashcards.forEach((item) => {
-                container.innerHTML += `<div class="flip-card bg-transparent w-full h-40 md:h-56 perspective cursor-pointer" onclick="flipAndSpeak(this, '${item.word}', '${item.emoji}')">
-                    <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-sm border border-[#D5CFE1]">
-                        <div class="flip-card-front absolute w-full h-full bg-white rounded-[1rem] overflow-hidden flex flex-col">
-                            <img src="${item.url}" class="w-full h-24 md:h-36 object-cover" onerror="this.src='https://placehold.co/400x300/F4EFE6/5A504E?text=صورة'">
-                            <div class="flex-1 flex items-center justify-center bg-[#FCF9F2] p-1"><p class="font-bold text-[#A8A09B] text-[10px] md:text-xs">المسي عشان تعرفي!</p></div>
+                container.innerHTML += `<div class="flip-card bg-transparent w-full h-48 md:h-64 perspective cursor-pointer" onclick="flipAndSpeak(this, '${item.word}', '${item.emoji}')">
+                    <div class="flip-card-inner relative w-full h-full text-center rounded-3xl shadow-sm border border-[#D5CFE1]">
+                        <div class="flip-card-front absolute w-full h-full bg-[#FCF9F2] rounded-[1.2rem] overflow-hidden flex flex-col">
+                            <img src="${item.url}" class="w-full h-28 md:h-40 object-cover" onerror="this.src='https://placehold.co/400x300/F4EFE6/5C544F?text=صورة'">
+                            <div class="flex-1 flex items-center justify-center bg-[#FDFBF7] p-2"><p class="font-bold text-[#A8A09B] text-xs md:text-sm">المسي عشان تعرفي!</p></div>
                         </div>
-                        <div class="flip-card-back absolute w-full h-full bg-[#EAE6F5] rounded-[1rem] flex flex-col items-center justify-center p-2 border border-white text-gray-700">
-                            <span class="text-4xl md:text-6xl mb-1">${item.emoji}</span><h3 class="font-kids text-xl md:text-3xl font-bold mb-1 text-[#9086A8]">${item.word}</h3><p class="text-[10px] md:text-xs bg-white bg-opacity-60 px-2 py-0.5 rounded-xl font-bold text-soft-text">${item.hint}</p>
+                        <div class="flip-card-back absolute w-full h-full bg-[#EAE6F5] rounded-[1.2rem] flex flex-col items-center justify-center p-2 md:p-4 border border-white text-soft-text">
+                            <span class="text-5xl md:text-7xl mb-2">${item.emoji}</span><h3 class="font-kids text-2xl md:text-4xl font-bold mb-1 text-[#9086A8]">${item.word}</h3><p class="text-xs md:text-sm bg-white bg-opacity-60 px-2 py-1 rounded-xl font-bold text-soft-text">${item.hint}</p>
                         </div></div></div>`;
             });
         }
@@ -903,7 +1033,7 @@
 
         // --- لوحة الرسم ---
         const canvas = document.getElementById('drawingBoard'); const ctx = canvas.getContext('2d');
-        let isDrawing = false, drawMode = 'color', drawValue = '#F4D8DF', lineWidth = 10; 
+        let isDrawing = false, drawMode = 'color', drawValue = '#E2ACB8', lineWidth = 10; 
         function resizeCanvas() { const rect = canvas.parentElement.getBoundingClientRect(); canvas.width = rect.width; canvas.height = rect.height || 320; }
         function getMousePos(e) { const rect = canvas.getBoundingClientRect(); if(e.type.includes('touch')) return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top }; return { x: e.clientX - rect.left, y: e.clientY - rect.top }; }
         function setDrawMode(mode, value) { drawMode = mode; drawValue = value; }
@@ -921,14 +1051,21 @@
             triggerReward('🎁', 10); 
         }
 
-        // --- تشغيل كل شيء ---
+        // --- تشغيل كل شيء عند فتح الصفحة ---
         window.onload = () => {
+            // الشاشة الوهمية للتحميل
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hide-screen');
+                document.getElementById('welcome-overlay').classList.remove('hidden-initially');
+            }, 2500); // 2.5 ثانية تحميل
+
+            renderTasks();
             updateSmartGreeting();
             renderVideos();
             renderHandicrafts(); 
             renderFlashcards();
             setTimeout(resizeCanvas, 500); 
-            startAdditionExam(); 
+            startMathExam(); 
         };
         window.addEventListener('resize', resizeCanvas);
     </script>
