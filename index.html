@@ -33,7 +33,7 @@
         }
     </script>
     <style>
-        /* تصميم مريح للعين */
+        /* تصميم مريح للعين (الوضع النهاري) */
         body { 
             -webkit-tap-highlight-color: transparent; 
             background-color: #F4EFE6; 
@@ -45,6 +45,7 @@
             transition: filter 0.5s ease, background-color 0.5s ease;
         }
         
+        /* وضع حماية العين الإضافي */
         body.eye-care-mode { filter: sepia(0.25) brightness(0.85); background-color: #EFE4D3; }
 
         .view-section { display: none; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
@@ -98,6 +99,9 @@
                 position: fixed; inset: 0; background: #F4EFE6; z-index: 999999; text-align: center; padding: 20px;
             }
         }
+        
+        /* تعطيل النقر لتفادي الثغرات أثناء الانتقال التلقائي في التحديات */
+        .pointer-events-none-temp { pointer-events: none; opacity: 0.8; }
     </style>
 </head>
 <body class="font-body relative">
@@ -145,12 +149,12 @@
 
         <!-- اللوجو الكبير بخط المراعي مع عرض العمر الاحترافي -->
         <div class="flex flex-col items-center justify-center mt-1">
-            <h1 class="font-almarai text-5xl font-extrabold flex items-center justify-center gap-3 text-[#D18293] w-full text-center py-1">
+            <h1 class="font-almarai text-5xl md:text-6xl font-extrabold flex items-center justify-center gap-3 text-[#D18293] w-full text-center py-1">
                 <span class="bg-[#E2ACB8] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-sm text-2xl">👑</span>
                 جواهر
             </h1>
             <!-- حساب العمر الحقيقي 16 تموز 2020 -->
-            <div id="jawaher-age" class="bg-[#FCF9F2] border border-[#E2ACB8] text-[#D18293] text-xs font-bold px-4 py-1 rounded-full mt-2 shadow-sm">
+            <div id="jawaher-age" class="bg-[#FCF9F2] border border-[#E2ACB8] text-[#D18293] text-sm font-bold px-4 py-1.5 rounded-full mt-2 shadow-sm">
                 <!-- يتم حساب العمر هنا عبر الجافاسكربت -->
             </div>
         </div>
@@ -166,7 +170,7 @@
     <!-- ================= 1. واجهة "بيتي" (المهام اليومية وصورة الشهادة) ================= -->
     <main id="view-home" class="view-section active container mx-auto px-4 py-4">
         
-        <!-- الترحيب الذكي (حسب أوقات الصلاة دون ذكرها صراحة) -->
+        <!-- الترحيب الذكي (حسب أوقات الصلاة دون ذكرها) -->
         <div class="glass-card p-6 text-center mb-6 relative overflow-hidden border border-[#EAE1D1]">
             <div class="absolute -top-6 -right-6 text-8xl opacity-10" id="time-icon">☀️</div>
             <h2 id="dynamic-greeting" class="font-kids text-3xl md:text-4xl text-[#D67D98] mb-3 bounce-slow">أهلاً يا أميرتي! 💖</h2>
@@ -179,17 +183,17 @@
             مهام جواهر اليومية ✅
         </h3>
         
-        <!-- قائمة المهام المطلوبة مع خيارات صح أو خطأ -->
+        <!-- قائمة المهام المخصصة مع خيارات صح أو خطأ -->
         <div class="flex flex-col gap-3 mb-6" id="tasks-container">
             <!-- تتولد من الجافاسكربت -->
         </div>
         
         <!-- زر تحميل التقرير (يظهر فقط عند الإجابة على كل المهام) -->
-        <button id="btn-download-report" onclick="downloadDailyReport()" class="w-full bg-[#E2ACB8] text-white font-kids text-xl md:text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2 opacity-50 cursor-not-allowed transition-all" disabled>
+        <button id="btn-download-report" onclick="downloadDailyReport()" class="w-full bg-[#E2ACB8] text-white font-kids text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2 opacity-50 cursor-not-allowed transition-all" disabled>
             🔒 جاوبي ع كل المهام لتنزلي التقرير!
         </button>
 
-        <button onclick="switchView('view-learn', document.getElementById('nav-learn'))" class="w-full bg-[#90C2BF] text-white font-kids text-xl md:text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2">
+        <button onclick="switchView('view-learn', document.getElementById('nav-learn'))" class="w-full bg-[#90C2BF] text-white font-kids text-2xl py-4 rounded-3xl shadow-sm wiggle-hover mb-4 flex justify-center items-center gap-2">
             يلا نلعب تحديات حلوة! 🎮✨
         </button>
     </main>
@@ -208,7 +212,7 @@
             <button onclick="switchGame('game-piano')" class="game-tab-btn flex-shrink-0 bg-gray-100 text-gray-500 px-4 py-2 rounded-full font-bold border border-gray-200 shadow-sm">بيانو 🎹</button>
         </div>
 
-        <!-- 1. تحدي الحساب (المجموع لا يتجاوز 10 - دقة التنقل) -->
+        <!-- 1. تحدي الحساب (المجموع لا يتجاوز 10) -->
         <div id="game-addition" class="game-container active">
             <div class="glass-card p-6 rounded-3xl border border-[#C9EAE7] text-center mb-6 relative">
                 <div class="absolute top-0 left-0 w-full h-2 bg-[#EAF6F5] rounded-t-3xl overflow-hidden"><div id="addition-progress" class="h-full bg-[#7BC4BF] challenge-progress" style="width: 10%;"></div></div>
@@ -226,7 +230,7 @@
                     <span class="text-6xl mb-4 bounce-slow">🎓</span>
                     <h3 class="font-kids text-3xl text-[#7BC4BF] mb-2">نجومك الحلوة: <span id="addition-final-score"></span>/10</h3>
                     <p id="addition-final-msg" class="font-bold text-soft-text mb-4"></p>
-                    <button onclick="downloadAdditionResult()" class="mb-4 w-full bg-[#7BC4BF] text-white px-4 py-3 rounded-full font-bold shadow-sm flex justify-center items-center gap-2 wiggle-hover">
+                    <button onclick="downloadChallengeImage('تحدي الحساب ➕', examStates.addition.score, '/ 10')" class="mb-4 w-full bg-[#7BC4BF] text-white px-4 py-3 rounded-full font-bold shadow-sm flex justify-center items-center gap-2 wiggle-hover">
                         📥 احفظي النتيجة كصورة
                     </button>
                     <button onclick="startAdditionExam()" class="bg-[#EAF6F5] text-[#4A9994] px-6 py-2 rounded-full font-bold shadow-sm border border-[#C9EAE7] w-full">نلعب كمان مرة 🔄</button>
@@ -249,7 +253,10 @@
                     <span class="text-6xl mb-4 bounce-slow">🎁</span>
                     <h3 class="font-kids text-3xl text-[#8AD4CF] mb-2">نجومك الحلوة: <span id="math-final-score"></span>/10</h3>
                     <p id="math-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startMathExam()" class="bg-[#FDF3D0] text-[#B8962E] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1E4B3]">نلعب كمان مرة 🔄</button>
+                    <button onclick="downloadChallengeImage('لعبة عد الفواكه 🍍', examStates.math.score, '/ 10')" class="mb-4 w-full bg-[#E5D8A5] text-[#A39459] px-4 py-3 rounded-full font-bold shadow-sm flex justify-center items-center gap-2 wiggle-hover">
+                        📥 احفظي النتيجة كصورة
+                    </button>
+                    <button onclick="startMathExam()" class="bg-[#FDF3D0] text-[#B8962E] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1E4B3] w-full">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="math-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
@@ -272,7 +279,10 @@
                     <span class="text-6xl mb-4 bounce-slow">✨</span>
                     <h3 class="font-kids text-3xl text-[#81C784] mb-2">نجومك الحلوة: <span id="bigger-final-score"></span>/10</h3>
                     <p id="bigger-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startBiggerExam()" class="bg-[#E8F5E9] text-[#5C9E60] px-6 py-2 rounded-full font-bold shadow-sm border border-[#CDE5D0]">نلعب كمان مرة 🔄</button>
+                    <button onclick="downloadChallengeImage('الرقم الأكبر ⚖️', examStates.bigger.score, '/ 10')" class="mb-4 w-full bg-[#A3C9A5] text-white px-4 py-3 rounded-full font-bold shadow-sm flex justify-center items-center gap-2 wiggle-hover">
+                        📥 احفظي النتيجة كصورة
+                    </button>
+                    <button onclick="startBiggerExam()" class="bg-[#E8F5E9] text-[#5C9E60] px-6 py-2 rounded-full font-bold shadow-sm border border-[#CDE5D0] w-full">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="bigger-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
@@ -292,7 +302,10 @@
                     <span class="text-6xl mb-4 bounce-slow">💖</span>
                     <h3 class="font-kids text-3xl text-[#DF85A3] mb-2">نجومك الحلوة: <span id="missing-final-score"></span>/10</h3>
                     <p id="missing-final-msg" class="font-bold text-soft-text mb-6"></p>
-                    <button onclick="startMissingExam()" class="bg-[#FDE2ED] text-[#C46A88] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1C7D6]">نلعب كمان مرة 🔄</button>
+                    <button onclick="downloadChallengeImage('الرقم الناقص 🔢', examStates.missing.score, '/ 10')" class="mb-4 w-full bg-[#D19AA8] text-white px-4 py-3 rounded-full font-bold shadow-sm flex justify-center items-center gap-2 wiggle-hover">
+                        📥 احفظي النتيجة كصورة
+                    </button>
+                    <button onclick="startMissingExam()" class="bg-[#FDE2ED] text-[#C46A88] px-6 py-2 rounded-full font-bold shadow-sm border border-[#F1C7D6] w-full">نلعب كمان مرة 🔄</button>
                 </div>
                 <p id="missing-feedback" class="text-xl font-bold h-8 transition-all"></p>
             </div>
@@ -307,7 +320,7 @@
             </div>
         </div>
 
-        <!-- 5. البالونات (مع 3 محاولات وإيقاف عند الخطأ) -->
+        <!-- البالونات (مع الخصم، 3 محاولات، والإنهاء الفوري) -->
         <div id="game-balloons" class="game-container hidden">
             <div class="glass-card p-4 rounded-3xl border border-[#EAC1CF] text-center mb-6 relative overflow-hidden flex flex-col justify-between" style="min-height: 400px;">
                 
@@ -327,7 +340,7 @@
                 <div id="balloon-result-area" class="hidden flex-col items-center justify-center py-6 z-20 bg-white bg-opacity-90 rounded-2xl absolute inset-2">
                     <span class="text-6xl mb-4 bounce-slow">🎈</span>
                     <h3 class="font-kids text-3xl text-[#C96B8A] mb-2">نجوم البالونات: <span id="balloon-final-score">0</span></h3>
-                    <button onclick="downloadBalloonResult()" class="mb-4 w-full bg-[#E2ACB8] text-white px-4 py-2 rounded-full font-bold shadow-sm flex justify-center items-center gap-2">
+                    <button onclick="downloadChallengeImage('تحدي البالونات 🎈', balloonScore, 'بالون')" class="mb-4 w-full bg-[#E2ACB8] text-white px-4 py-2 rounded-full font-bold shadow-sm flex justify-center items-center gap-2">
                         📥 احفظي النتيجة
                     </button>
                     <button onclick="resetBalloons()" class="bg-[#F4D8DF] text-[#C96B8A] px-6 py-2 rounded-full font-bold shadow-sm w-full">الرجوع 🔄</button>
@@ -361,7 +374,7 @@
         <div id="flashcards-container" class="grid grid-cols-2 gap-4 px-1"></div>
     </main>
 
-    <!-- ================= 4. مرسم جواهر (حفظ الرسمة للهاتف) ================= -->
+    <!-- ================= 4. مرسم جواهر (مع ميزة الحفظ للجهاز) ================= -->
     <main id="view-draw" class="view-section container mx-auto px-4 py-6 h-full">
         <h2 class="font-kids text-4xl text-center text-[#73ACA9] mb-4">مرسم الأميرة الهادئ 🎨</h2>
         <div class="glass-card p-4 rounded-3xl border border-[#7DB3B0]">
@@ -448,13 +461,25 @@
         </div>
     </nav>
 
-    <!-- ================= سكريبت التطبيق ================= -->
+    <!-- ================= سكريبت التطبيق المنظم (لحل مشكلة المتغيرات) ================= -->
     <script>
-        // =====================================================================
-        // === 🛑 منطقة البيانات والمحتوى 🛑 ===================================
-        // =====================================================================
-        
-        // 1. المهام اليومية اللي طلبتها بالزبط
+        // 1. المتغيرات العامة الأساسية
+        let totalStars = 0;
+        let audioCtx = null;
+        let balloonInterval = null;
+        let balloonScore = 0;
+        let balloonLives = 3;
+        let challengeTimeout = null;
+        let isProcessingAnswer = false; 
+        let taskAnswers = {}; 
+        let examStates = {
+            addition: { q: 1, score: 0, total: 10, ans: 0 },
+            math: { q: 1, score: 0, total: 10, target: 0, fruit: '' },
+            bigger: { q: 1, score: 0, total: 10, ans: 0 },
+            missing: { q: 1, score: 0, total: 10, ans: 0 }
+        };
+
+        // 2. البيانات (المهام، الفيديو، البطاقات، الأشغال)
         const dailyTasks = [
             { id: 1, text: "فرشيت أسناني 🦷" },
             { id: 2, text: "شربت الحليب 🥛" },
@@ -464,7 +489,6 @@
             { id: 6, text: "أكلت الفواكه الي بحبها 🍓🥭" }
         ];
 
-        // 2. الفيديوهات والأناشيد المحدثة بالـ 5 روابط
         let educationalVideos = [
             { title: 'أنشودة الحروف - الف ارنب يجري يلعب', url: 'https://www.youtube.com/embed/ZnnPhPAWxg4' },
             { title: 'الحواس الخمس - أنا إنسان لي إحساس', url: 'https://www.youtube.com/embed/1UZeMlKDsrU' },
@@ -473,13 +497,11 @@
             { title: 'على دلعونة زيتون بلادي', url: 'https://www.youtube.com/embed/sPPPqhX0XRg' }
         ];
 
-        // 3. صور الأشغال اليدوية (تقرأ تلقائيا 20 صورة من المجلد بدون إظهار المسار للمستخدم)
         let myHandicrafts = [];
         for(let i = 1; i <= 20; i++) {
             myHandicrafts.push({ url: `images/${i}.jpg` });
         }
 
-        // 4. البطاقات التعليمية الناطقة
         let flashcards = [
             { url: 'https://placehold.co/400x300/E2ACB8/5C544F?text=صورة+فراولة', word: 'فَرَاوْلَة', emoji: '🍓', hint: 'مشروبك المفضل!' },
             { url: 'https://placehold.co/400x300/E5D8A5/5C544F?text=صورة+أسد', word: 'أَسَد', emoji: '🦁', hint: 'ملك الغابة القوي.' },
@@ -499,7 +521,129 @@
             { url: 'https://placehold.co/400x300/E5D8A5/5C544F?text=صورة+شمس', word: 'شَمْس', emoji: '☀️', hint: 'بتدفينا الصبح.' }
         ];
 
-        // --- حساب وعرض العمر الدقيق (16 تموز 2020) ---
+        // 3. الدوال المساعدة (Utility Functions)
+        function initAudio() {
+            if (!audioCtx) {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if(AudioContext) audioCtx = new AudioContext();
+                } catch(e) { console.warn("AudioContext not supported", e); }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function triggerReward(emojiType, amount = 15) {
+            for (let i = 0; i < amount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                confetti.innerText = emojiType;
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                confetti.style.opacity = '0.7'; 
+                document.body.appendChild(confetti);
+                setTimeout(() => { confetti.remove(); }, 5000);
+            }
+        }
+
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85; 
+                utterance.pitch = 1.1; 
+                utterance.volume = 0.8; 
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function initStars() {
+            const savedStars = localStorage.getItem('jawaher_stars');
+            if(savedStars !== null) {
+                totalStars = parseInt(savedStars);
+            }
+            document.getElementById('star-count').innerText = totalStars;
+        }
+
+        function addStar(amount = 1) {
+            totalStars += amount;
+            if(totalStars < 0) totalStars = 0; 
+            localStorage.setItem('jawaher_stars', totalStars);
+            
+            document.getElementById('star-count').innerText = totalStars;
+            const starIconEl = document.getElementById('star-icon');
+            starIconEl.classList.remove('star-pulse');
+            void starIconEl.offsetWidth; 
+            starIconEl.classList.add('star-pulse');
+            if(amount > 0) triggerReward('⭐', 3 * amount); 
+        }
+
+        function showSweetMessage(text) {
+            const box = document.getElementById('surprise-box');
+            box.innerText = text;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 3500);
+        }
+
+        function downloadChallengeImage(title, score, totalOrScoreText) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 600;
+            canvas.height = 600;
+            
+            ctx.fillStyle = "#FCFAF6";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "#90C2BF";
+            ctx.lineWidth = 15;
+            ctx.strokeRect(15, 15, canvas.width-30, canvas.height-30);
+
+            ctx.direction = "rtl";
+            ctx.textAlign = "center";
+            
+            ctx.font = "bold 45px Tajawal, sans-serif";
+            ctx.fillStyle = "#4A9994";
+            ctx.fillText(title, canvas.width/2, 100);
+
+            ctx.font = "bold 50px Tajawal, sans-serif";
+            ctx.fillStyle = "#D67D98";
+            ctx.fillText("الاسم: جواهر 👑", canvas.width/2, 200);
+
+            ctx.font = "bold 60px Tajawal, sans-serif";
+            ctx.fillStyle = "#5C544F";
+            ctx.fillText(`النتيجة: ${score} ${totalOrScoreText} ⭐`, canvas.width/2, 320);
+
+            const now = new Date();
+            const dateStr = now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear();
+            
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let ampm = hours >= 12 ? 'المساء' : 'الصباح';
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            const timeStr = hours + ':' + minutes + ' ' + ampm;
+            
+            const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+            
+            ctx.font = "bold 25px Tajawal, sans-serif";
+            ctx.fillStyle = "#9086A8";
+            ctx.fillText(`اليوم: ${days[now.getDay()]} | الساعة: ${timeStr}`, canvas.width/2, 450);
+            ctx.fillText(`التاريخ: ${dateStr}`, canvas.width/2, 500);
+
+            const link = document.createElement('a');
+            link.download = `نتيجة_تحدي_جواهر.jpg`;
+            link.href = canvas.toDataURL('image/jpeg');
+            link.click();
+            
+            speakWord('تم الحفظ يا بطلة');
+            addStar(3);
+            triggerReward('🎉', 20);
+        }
+
         function calculateAge(birthDateString) {
             const birthDate = new Date(birthDateString);
             const today = new Date();
@@ -524,7 +668,6 @@
             document.getElementById('jawaher-age').innerText = ageText;
         }
 
-        // --- 20 سلوجان ذكي بيتغير حسب الوقت والتاريخ واليوم ---
         function changeSlogan() {
             const now = new Date();
             const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
@@ -561,11 +704,99 @@
             const el = document.getElementById('dynamic-slogan');
             if(el) el.innerText = rSlogan;
         }
-        setInterval(changeSlogan, 10000);
+        
+        function updateSmartGreeting() {
+            const hour = new Date().getHours();
+            let timeGreeting = "أهلاً يا أميرتي! 💖", timeIcon = "☀️";
+            
+            if (hour >= 4 && hour < 11) { timeGreeting = "صباح الخير والنشاط! ☀️"; timeIcon = "🌅"; } 
+            else if (hour >= 11 && hour < 15) { timeGreeting = "نهارك سعيد ومفرح! 🌸"; timeIcon = "☀️"; } 
+            else if (hour >= 15 && hour < 18) { timeGreeting = "مساء الخير يا حلوة! 🌇"; timeIcon = "🌤️"; } 
+            else if (hour >= 18 && hour < 20) { timeGreeting = "مساء الورد يا قمر! 🌙"; timeIcon = "🌆"; } 
+            else { timeGreeting = "تصبحي على خير وأحلام سعيدة! 🌙"; timeIcon = "🌙"; }
+            
+            document.getElementById('dynamic-greeting').innerText = timeGreeting;
+            document.getElementById('time-icon').innerText = timeIcon;
+        }
 
-        // --- تهيئة المهام بنظام الإجابات (الصح والخطأ) مع قفل التحميل ---
-        let taskAnswers = {}; 
+        // 4. دوال التفاعل والواجهة
+        function startAppWithVoice() {
+            document.getElementById('welcome-overlay').classList.add('hide-screen');
+            initAudio();
+            if('speechSynthesis' in window) window.speechSynthesis.getVoices();
+            
+            const hour = new Date().getHours();
+            if(hour >= 0 && hour < 5) {
+                setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، الجو بارد شوي، البسي أواعيكي الدافية عشان ما تمرضي!"); }, 300);
+            } else {
+                setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، نورتي التطبيق!"); }, 300);
+            }
+            triggerReward('✨', 20);
+        }
 
+        function toggleEyeCare() {
+            document.body.classList.toggle('eye-care-mode');
+            const btn = document.getElementById('eye-btn');
+            if(document.body.classList.contains('eye-care-mode')) {
+                btn.classList.add('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
+                btn.classList.remove('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
+                speakWord('وضع الراحة');
+            } else {
+                btn.classList.remove('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
+                btn.classList.add('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
+                speakWord('الوضع العادي');
+            }
+        }
+
+        function playSurprise() {
+            const surprises = ["بحبك يا بابا أبو جواهر! 💖", "انتي أشطر بنت! 👑", "يلا نلعب 🎈", `صار معك ${totalStars} نجوم! ⭐`];
+            showSweetMessage(surprises[Math.floor(Math.random() * surprises.length)]);
+            triggerReward('🎁', 10);
+        }
+
+        function switchView(viewId, btnElement) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(btn => { btn.classList.remove('active'); });
+            btnElement.classList.add('active');
+            
+            if(viewId !== 'view-learn' && balloonInterval) {
+                resetBalloons();
+            }
+            if(viewId === 'view-draw') { setTimeout(resizeCanvas, 100); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchGame(gameId) {
+            if(balloonInterval) resetBalloons();
+            clearTimeout(challengeTimeout);
+
+            document.querySelectorAll('.game-container').forEach(el => el.classList.add('hidden'));
+            document.getElementById(gameId).classList.remove('hidden');
+            document.querySelectorAll('.game-tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-jawaher-yellow', 'text-[#A39459]', 'bg-[#DDECDA]', 'text-[#6D936F]', 'bg-[#F0D5E1]', 'text-[#B87A96]', 'bg-jawaher-purple', 'text-[#9086A8]', 'bg-jawaher-pink', 'text-[#B87C8B]', 'bg-abu-jawaher-turq', 'text-[#5A8E8B]', 'bg-[#EAF6F5]', 'text-[#4A9994]');
+                btn.classList.add('bg-white', 'text-gray-400'); 
+            });
+            
+            event.target.classList.remove('bg-white', 'text-gray-400');
+            event.target.classList.add('active');
+            if(gameId.includes('math')) event.target.classList.add('bg-jawaher-yellow', 'text-[#A39459]');
+            if(gameId.includes('bigger')) event.target.classList.add('bg-[#DDECDA]', 'text-[#6D936F]');
+            if(gameId.includes('missing')) event.target.classList.add('bg-[#F0D5E1]', 'text-[#B87A96]');
+            if(gameId.includes('memory')) event.target.classList.add('bg-jawaher-purple', 'text-[#9086A8]');
+            if(gameId.includes('balloons')) event.target.classList.add('bg-jawaher-pink', 'text-[#B87C8B]');
+            if(gameId.includes('piano')) event.target.classList.add('bg-abu-jawaher-turq', 'text-[#5A8E8B]');
+            if(gameId.includes('addition')) event.target.classList.add('bg-[#EAF6F5]', 'text-[#4A9994]');
+            
+            if(gameId === 'game-addition') startAdditionExam();
+            if(gameId === 'game-math') startMathExam();
+            if(gameId === 'game-bigger') startBiggerExam();
+            if(gameId === 'game-missing') startMissingExam();
+            if(gameId === 'game-memory') initMemoryGame();
+            if(gameId === 'game-balloons') resetBalloons(); 
+        }
+
+        // 5. المهام اليومية
         function renderTasks() {
             const container = document.getElementById('tasks-container');
             container.innerHTML = '';
@@ -625,20 +856,17 @@
             const total = dailyTasks.length;
             const percentage = (yesCount / total) * 100;
             
-            // علامات عشوائية تلائم مستوى النجاح (كما طلبت)
             let gradeNum = 0;
             let gradeText = "";
             let emoji = "";
             if(percentage === 100) { 
-                gradeNum = Math.floor(Math.random() * 5) + 96; // 96-100
+                gradeNum = Math.floor(Math.random() * 5) + 96; 
                 gradeText = "ممتازة! بطلة يسعور"; emoji = "🏆"; 
-            }
-            else if(percentage >= 60) { 
-                gradeNum = Math.floor(Math.random() * 15) + 80; // 80-94
+            } else if(percentage >= 60) { 
+                gradeNum = Math.floor(Math.random() * 15) + 80; 
                 gradeText = "شاطرة جداً!"; emoji = "🌟"; 
-            }
-            else { 
-                gradeNum = Math.floor(Math.random() * 15) + 60; // 60-74
+            } else { 
+                gradeNum = Math.floor(Math.random() * 15) + 60; 
                 gradeText = "حلو، بكرة أحسن!"; emoji = "💖"; 
             }
 
@@ -699,135 +927,7 @@
             triggerReward('🎉', 20);
         }
 
-        // --- وضع حماية العين ---
-        function toggleEyeCare() {
-            document.body.classList.toggle('eye-care-mode');
-            const btn = document.getElementById('eye-btn');
-            if(document.body.classList.contains('eye-care-mode')) {
-                btn.classList.add('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
-                btn.classList.remove('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
-                speakWord('وضع الراحة');
-            } else {
-                btn.classList.remove('bg-[#E5D8A5]', 'text-[#8C8052]', 'border-[#D1C591]');
-                btn.classList.add('bg-jawaher-purple', 'text-[#9086A8]', 'border-[#D5CFE1]');
-                speakWord('الوضع العادي');
-            }
-        }
-
-        // --- النطق الصوتي ---
-        function speakWord(word) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'ar-SA';
-                utterance.rate = 0.85; 
-                utterance.pitch = 1.1; 
-                utterance.volume = 0.8; 
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function startAppWithVoice() {
-            document.getElementById('welcome-overlay').classList.add('hide-screen');
-            if(audioCtx.state === 'suspended') audioCtx.resume();
-            if('speechSynthesis' in window) window.speechSynthesis.getVoices();
-            
-            const hour = new Date().getHours();
-            if(hour >= 0 && hour < 5) {
-                setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، الجو بارد شوي، البسي أواعيكي الدافية عشان ما تمرضي!"); }, 300);
-            } else {
-                setTimeout(() => { speakWord("أهلاً يا أميرتي جواهر، نورتي التطبيق!"); }, 300);
-            }
-            triggerReward('✨', 20);
-        }
-
-        // --- نظام النجوم باستخدام LocalStorage ---
-        let totalStars = 0;
-        function initStars() {
-            const savedStars = localStorage.getItem('jawaher_stars');
-            if(savedStars !== null) {
-                totalStars = parseInt(savedStars);
-            }
-            document.getElementById('star-count').innerText = totalStars;
-        }
-
-        function addStar(amount = 1) {
-            totalStars += amount;
-            if(totalStars < 0) totalStars = 0; 
-            localStorage.setItem('jawaher_stars', totalStars);
-            
-            document.getElementById('star-count').innerText = totalStars;
-            const starIconEl = document.getElementById('star-icon');
-            starIconEl.classList.remove('star-pulse');
-            void starIconEl.offsetWidth; 
-            starIconEl.classList.add('star-pulse');
-            if(amount > 0) triggerReward('⭐', 3 * amount); 
-        }
-
-        // --- الترحيب الذكي (حسب مواقيت الصلاة دون ذكرهم صراحة) ---
-        function updateSmartGreeting() {
-            const hour = new Date().getHours();
-            let timeGreeting = "أهلاً يا أميرتي! 💖", timeIcon = "☀️";
-            
-            // فجر (4 لـ 11) - ظهر (11 لـ 15) - عصر (15 لـ 18) - مغرب (18 لـ 20) - عشاء (20 لـ 4)
-            if (hour >= 4 && hour < 11) { timeGreeting = "صباح الخير والنشاط! ☀️"; timeIcon = "🌅"; } 
-            else if (hour >= 11 && hour < 15) { timeGreeting = "نهارك سعيد ومفرح! 🌸"; timeIcon = "☀️"; } 
-            else if (hour >= 15 && hour < 18) { timeGreeting = "مساء الخير يا حلوة! 🌇"; timeIcon = "🌤️"; } 
-            else if (hour >= 18 && hour < 20) { timeGreeting = "مساء الورد يا قمر! 🌙"; timeIcon = "🌆"; } 
-            else { timeGreeting = "تصبحي على خير وأحلام سعيدة! 🌙"; timeIcon = "🌙"; }
-            
-            document.getElementById('dynamic-greeting').innerText = timeGreeting;
-            document.getElementById('time-icon').innerText = timeIcon;
-        }
-        setInterval(updateSmartGreeting, 60000); 
-
-        // --- وظائف التنقل ---
-        function switchView(viewId, btnElement) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(btn => { btn.classList.remove('active'); });
-            btnElement.classList.add('active');
-            
-            if(viewId === 'view-draw') { setTimeout(resizeCanvas, 100); }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function switchGame(gameId) {
-            document.querySelectorAll('.game-container').forEach(el => el.classList.add('hidden'));
-            document.getElementById(gameId).classList.remove('hidden');
-            document.querySelectorAll('.game-tab-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-jawaher-yellow', 'text-[#A39459]', 'bg-[#DDECDA]', 'text-[#6D936F]', 'bg-[#F0D5E1]', 'text-[#B87A96]', 'bg-jawaher-purple', 'text-[#9086A8]', 'bg-jawaher-pink', 'text-[#B87C8B]', 'bg-abu-jawaher-turq', 'text-[#5A8E8B]');
-                btn.classList.add('bg-white', 'text-gray-400'); 
-            });
-            
-            event.target.classList.remove('bg-white', 'text-gray-400');
-            event.target.classList.add('active');
-            if(gameId.includes('math')) event.target.classList.add('bg-jawaher-yellow', 'text-[#A39459]');
-            if(gameId.includes('bigger')) event.target.classList.add('bg-[#DDECDA]', 'text-[#6D936F]');
-            if(gameId.includes('missing')) event.target.classList.add('bg-[#F0D5E1]', 'text-[#B87A96]');
-            if(gameId.includes('memory')) event.target.classList.add('bg-jawaher-purple', 'text-[#9086A8]');
-            if(gameId.includes('balloons')) event.target.classList.add('bg-jawaher-pink', 'text-[#B87C8B]');
-            if(gameId.includes('piano')) event.target.classList.add('bg-abu-jawaher-turq', 'text-[#5A8E8B]');
-            if(gameId.includes('addition')) event.target.classList.add('bg-[#EAF6F5]', 'text-[#4A9994]');
-            
-            if(gameId === 'game-addition') startAdditionExam();
-            if(gameId === 'game-math') startMathExam();
-            if(gameId === 'game-bigger') startBiggerExam();
-            if(gameId === 'game-missing') startMissingExam();
-            if(gameId === 'game-memory') initMemoryGame();
-            if(gameId === 'game-balloons') resetBalloons();
-        }
-
-        // ================= التحديات والألغاز ================= //
-        
-        let examStates = {
-            addition: { q: 1, score: 0, total: 10, ans: 0 },
-            math: { q: 1, score: 0, total: 10, target: 0, fruit: '' },
-            bigger: { q: 1, score: 0, total: 10, ans: 0 },
-            missing: { q: 1, score: 0, total: 10, ans: 0 }
-        };
-
+        // 6. التحديات (Challenges)
         function showChallengeResult(type, score, total) {
             document.getElementById(`${type}-play-area`).classList.add('hidden');
             document.getElementById(`${type}-result-area`).classList.remove('hidden');
@@ -841,8 +941,9 @@
             document.getElementById(`${type}-final-msg`).innerText = msg;
         }
 
-        // --- 1. تحدي الحساب ➕ (المجموع لا يتجاوز 10) ---
+        // --- تحدي الحساب ➕ ---
         function startAdditionExam() {
+            clearTimeout(challengeTimeout); isProcessingAnswer = false;
             examStates.addition = { q: 1, score: 0, total: 10, ans: 0 };
             document.getElementById('addition-play-area').classList.remove('hidden');
             document.getElementById('addition-result-area').classList.add('hidden');
@@ -850,15 +951,16 @@
             nextAdditionQuestion();
         }
         function nextAdditionQuestion() {
+            isProcessingAnswer = false;
             if(examStates.addition.q > examStates.addition.total) { showChallengeResult('addition', examStates.addition.score, examStates.addition.total); return; }
             document.getElementById('addition-status').innerText = `التحدي ${examStates.addition.q} من ${examStates.addition.total}`;
             document.getElementById('addition-progress').style.width = `${(examStates.addition.q / examStates.addition.total) * 100}%`;
             document.getElementById('addition-feedback').innerText = '';
 
-            // أرقام عشوائية بشرط المجموع لا يتجاوز 10
-            let num1 = Math.floor(Math.random() * 9) + 1; // 1 لـ 9
-            let maxNum2 = 10 - num1;
-            let num2 = Math.floor(Math.random() * maxNum2) + 1; // الرقم الثاني يكون بحيث المجموع ما يتجاوز 10
+            // أرقام عشوائية المجموع لا يتجاوز 10
+            let num1 = Math.floor(Math.random() * 9) + 1; 
+            let maxNum2 = 10 - num1; 
+            let num2 = Math.floor(Math.random() * maxNum2) + 1; 
             
             examStates.addition.ans = num1 + num2;
             
@@ -875,70 +977,17 @@
             document.getElementById('addition-options').innerHTML = optionsHtml;
         }
         function checkAdditionAns(ans) {
+            if(isProcessingAnswer) return; 
+            isProcessingAnswer = true;
             const res = document.getElementById('addition-feedback');
             if(ans === examStates.addition.ans) { res.innerText = 'صح! بطلة بالحساب 👏'; res.className = 'text-lg font-bold h-8 text-[#7BC4BF] bounce-slow'; speakWord('صح'); examStates.addition.score++; triggerReward('🎓', 2); } 
             else { res.innerText = 'لأ.. جربي كمان 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.addition.q++; setTimeout(nextAdditionQuestion, 1500); // تنقل سلس تلقائي
+            examStates.addition.q++; challengeTimeout = setTimeout(nextAdditionQuestion, 1500);
         }
 
-        // ميزة حفظ نتيجة تحدي الحساب كصورة
-        function downloadAdditionResult() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 600;
-            canvas.height = 600;
-            
-            ctx.fillStyle = "#EAF6F5";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = "#90C2BF";
-            ctx.lineWidth = 15;
-            ctx.strokeRect(15, 15, canvas.width-30, canvas.height-30);
-
-            ctx.direction = "rtl";
-            ctx.textAlign = "center";
-            
-            ctx.font = "bold 45px Tajawal, sans-serif";
-            ctx.fillStyle = "#4A9994";
-            ctx.fillText("تحدي الحساب", canvas.width/2, 100);
-
-            ctx.font = "bold 50px Tajawal, sans-serif";
-            ctx.fillStyle = "#D67D98";
-            ctx.fillText("الاسم: جواهر 👑", canvas.width/2, 200);
-
-            ctx.font = "bold 60px Tajawal, sans-serif";
-            ctx.fillStyle = "#5C544F";
-            ctx.fillText(`النتيجة: ${examStates.addition.score} / 10 ⭐`, canvas.width/2, 320);
-
-            const now = new Date();
-            const dateStr = now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear();
-            
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            let ampm = hours >= 12 ? 'المساء' : 'الصباح';
-            hours = hours % 12;
-            hours = hours ? hours : 12; 
-            minutes = minutes < 10 ? '0'+minutes : minutes;
-            const timeStr = hours + ':' + minutes + ' ' + ampm;
-            
-            const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-            
-            ctx.font = "bold 25px Tajawal, sans-serif";
-            ctx.fillStyle = "#9086A8";
-            ctx.fillText(`اليوم: ${days[now.getDay()]} | الساعة: ${timeStr}`, canvas.width/2, 450);
-            ctx.fillText(`التاريخ: ${dateStr}`, canvas.width/2, 500);
-
-            const link = document.createElement('a');
-            link.download = `نتيجة_حساب_جواهر.jpg`;
-            link.href = canvas.toDataURL('image/jpeg');
-            link.click();
-            
-            speakWord('تم الحفظ يا بطلة');
-            addStar(3);
-            triggerReward('🎉', 20);
-        }
-
-        // --- 2. تحدي العد ---
+        // --- تحدي العد 🍍 ---
         function startMathExam() {
+            clearTimeout(challengeTimeout); isProcessingAnswer = false;
             examStates.math = { q: 1, score: 0, total: 10, target: 0, fruit: '' };
             document.getElementById('math-play-area').classList.remove('hidden');
             document.getElementById('math-result-area').classList.add('hidden');
@@ -946,6 +995,7 @@
             nextMathQuestion();
         }
         function nextMathQuestion() {
+            isProcessingAnswer = false;
             if(examStates.math.q > examStates.math.total) { showChallengeResult('math', examStates.math.score, examStates.math.total); return; }
             document.getElementById('math-status').innerText = `التحدي ${examStates.math.q} من ${examStates.math.total}`;
             document.getElementById('math-progress').style.width = `${(examStates.math.q / examStates.math.total) * 100}%`;
@@ -968,61 +1018,107 @@
             document.getElementById('math-options').innerHTML = optionsHtml;
         }
         function checkMathAns(ans) {
+            if(isProcessingAnswer) return; isProcessingAnswer = true;
             const res = document.getElementById('math-feedback');
             if(ans === examStates.math.target) { res.innerText = 'صح! بطلة 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('صح'); examStates.math.score++; triggerReward(examStates.math.fruit, 2); } 
             else { res.innerText = 'لأ.. ركزي يا حلوة 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.math.q++; setTimeout(nextMathQuestion, 1500);
+            examStates.math.q++; challengeTimeout = setTimeout(nextMathQuestion, 1500);
         }
 
-        // --- 3. تحدي الرقم الأكبر ---
-        function startBiggerExam() { examStates.bigger = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('bigger-play-area').classList.remove('hidden'); document.getElementById('bigger-result-area').classList.add('hidden'); document.getElementById('bigger-result-area').classList.remove('flex'); nextBiggerQuestion(); }
+        // --- تحدي الرقم الأكبر ⚖️ ---
+        function startBiggerExam() {
+            clearTimeout(challengeTimeout); isProcessingAnswer = false;
+            examStates.bigger = { q: 1, score: 0, total: 10, ans: 0 };
+            document.getElementById('bigger-play-area').classList.remove('hidden');
+            document.getElementById('bigger-result-area').classList.add('hidden');
+            document.getElementById('bigger-result-area').classList.remove('flex');
+            nextBiggerQuestion();
+        }
         function nextBiggerQuestion() {
+            isProcessingAnswer = false;
             if(examStates.bigger.q > examStates.bigger.total) { showChallengeResult('bigger', examStates.bigger.score, examStates.bigger.total); return; }
-            document.getElementById('bigger-status').innerText = `التحدي ${examStates.bigger.q} من ${examStates.bigger.total}`; document.getElementById('bigger-progress').style.width = `${(examStates.bigger.q / examStates.bigger.total) * 100}%`; document.getElementById('bigger-feedback').innerText = '';
-            let num1 = Math.floor(Math.random() * 10) + 1, num2 = Math.floor(Math.random() * 10) + 1; while(num1 === num2) num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('bigger-status').innerText = `التحدي ${examStates.bigger.q} من ${examStates.bigger.total}`;
+            document.getElementById('bigger-progress').style.width = `${(examStates.bigger.q / examStates.bigger.total) * 100}%`;
+            document.getElementById('bigger-feedback').innerText = '';
+
+            let num1 = Math.floor(Math.random() * 10) + 1;
+            let num2 = Math.floor(Math.random() * 10) + 1;
+            while(num1 === num2) num2 = Math.floor(Math.random() * 10) + 1;
+
             examStates.bigger.ans = num1 > num2 ? 1 : 2;
-            document.getElementById('bigger-opt-1').innerText = num1; document.getElementById('bigger-opt-2').innerText = num2;
+
+            document.getElementById('bigger-opt-1').innerText = num1;
+            document.getElementById('bigger-opt-2').innerText = num2;
         }
         function checkBiggerExam(choice) {
+            if(isProcessingAnswer) return; isProcessingAnswer = true;
             const res = document.getElementById('bigger-feedback');
             if(choice === examStates.bigger.ans) { res.innerText = 'صح! إنتي الأشطر 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('شاطرة'); examStates.bigger.score++; triggerReward('🌟', 2); } 
             else { res.innerText = 'أوبس! الرقم الثاني أكبر 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('انتبهي'); }
-            examStates.bigger.q++; setTimeout(nextBiggerQuestion, 1500);
+            examStates.bigger.q++; challengeTimeout = setTimeout(nextBiggerQuestion, 1500);
         }
 
-        // --- 4. تحدي الرقم الناقص ---
-        function startMissingExam() { examStates.missing = { q: 1, score: 0, total: 10, ans: 0 }; document.getElementById('missing-play-area').classList.remove('hidden'); document.getElementById('missing-result-area').classList.add('hidden'); document.getElementById('missing-result-area').classList.remove('flex'); nextMissingQuestion(); }
+        // --- تحدي الرقم الناقص 🔢 ---
+        function startMissingExam() {
+            clearTimeout(challengeTimeout); isProcessingAnswer = false;
+            examStates.missing = { q: 1, score: 0, total: 10, ans: 0 };
+            document.getElementById('missing-play-area').classList.remove('hidden');
+            document.getElementById('missing-result-area').classList.add('hidden');
+            document.getElementById('missing-result-area').classList.remove('flex');
+            nextMissingQuestion();
+        }
         function nextMissingQuestion() {
+            isProcessingAnswer = false;
             if(examStates.missing.q > examStates.missing.total) { showChallengeResult('missing', examStates.missing.score, examStates.missing.total); return; }
-            document.getElementById('missing-status').innerText = `اللغز ${examStates.missing.q} من ${examStates.missing.total}`; document.getElementById('missing-progress').style.width = `${(examStates.missing.q / examStates.missing.total) * 100}%`; document.getElementById('missing-feedback').innerText = '';
-            let startNum = Math.floor(Math.random() * 8) + 1, seq = [startNum, startNum + 1, startNum + 2], missingIndex = Math.floor(Math.random() * 3);
-            examStates.missing.ans = seq[missingIndex]; seq[missingIndex] = '?';
-            let seqHtml = ''; seq.forEach(n => { let boxClass = n === '?' ? 'bg-[#F0D5E1] text-[#B87A96] border-[#E6C1CF] border-2 animate-pulse' : 'bg-[#FCF9F2] text-soft-text border-[#EAE1D1] border-2'; seqHtml += `<div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold shadow-sm ${boxClass}">${n}</div>`; });
+            document.getElementById('missing-status').innerText = `اللغز ${examStates.missing.q} من ${examStates.missing.total}`;
+            document.getElementById('missing-progress').style.width = `${(examStates.missing.q / examStates.missing.total) * 100}%`;
+            document.getElementById('missing-feedback').innerText = '';
+
+            let startNum = Math.floor(Math.random() * 8) + 1;
+            let seq = [startNum, startNum + 1, startNum + 2];
+            
+            let missingIndex = Math.floor(Math.random() * 3);
+            examStates.missing.ans = seq[missingIndex];
+            seq[missingIndex] = '?';
+
+            let seqHtml = '';
+            seq.forEach(n => {
+                let boxClass = n === '?' ? 'bg-[#F0D5E1] text-[#B87A96] border-[#E6C1CF] border-2 animate-pulse' : 'bg-[#FCF9F2] text-soft-text border-[#EAE1D1] border-2';
+                seqHtml += `<div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold shadow-sm ${boxClass}">${n}</div>`;
+            });
             document.getElementById('missing-sequence').innerHTML = seqHtml;
-            let options = [examStates.missing.ans]; while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w) && w !== examStates.missing.ans) options.push(w); } options.sort(() => Math.random() - 0.5);
-            let optionsHtml = ''; options.forEach(opt => { optionsHtml += `<button onclick="checkMissingAns(${opt})" class="bg-[#FCF9F2] text-[#B87A96] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E6C1CF] active:translate-y-1 transition mx-auto">${opt}</button>`; });
+
+            let options = [examStates.missing.ans];
+            while(options.length < 3) { let w = Math.floor(Math.random() * 10) + 1; if(!options.includes(w) && w !== examStates.missing.ans) options.push(w); }
+            options.sort(() => Math.random() - 0.5);
+
+            let optionsHtml = '';
+            options.forEach(opt => { optionsHtml += `<button onclick="checkMissingAns(${opt})" class="bg-[#FCF9F2] text-[#B87A96] font-bold w-16 h-16 rounded-2xl text-3xl shadow-sm border border-[#E6C1CF] active:translate-y-1 transition mx-auto">${opt}</button>`; });
             document.getElementById('missing-options').innerHTML = optionsHtml;
         }
         function checkMissingAns(ans) {
+            if(isProcessingAnswer) return; isProcessingAnswer = true;
             const res = document.getElementById('missing-feedback');
             if(ans === examStates.missing.ans) { res.innerText = 'صح! تسلسل ممتاز 👏'; res.className = 'text-lg font-bold h-8 text-[#6D936F] bounce-slow'; speakWord('ممتازة'); examStates.missing.score++; triggerReward('🔢', 2); } 
             else { res.innerText = 'رقم غلط.. ركزي 😉'; res.className = 'text-lg font-bold h-8 text-[#A8A09B]'; speakWord('حاولي كمان'); }
-            examStates.missing.q++; setTimeout(nextMissingQuestion, 1500);
+            examStates.missing.q++; challengeTimeout = setTimeout(nextMissingQuestion, 1500);
         }
 
-        // ================= الألعاب الترفيهية ================= //
+        // 7. الألعاب الترفيهية
         function playTone(frequency, keyElement) {
-            if (audioCtx.state === 'suspended') audioCtx.resume(); 
-            const oscillator = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
-            oscillator.type = 'sine'; oscillator.frequency.value = frequency; oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
-            oscillator.start(); gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1); oscillator.stop(audioCtx.currentTime + 1);
+            initAudio();
+            if(!audioCtx) return;
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sine'; 
+            oscillator.frequency.value = frequency;
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
+            oscillator.stop(audioCtx.currentTime + 1);
             keyElement.style.opacity = '0.7'; setTimeout(() => keyElement.style.opacity = '1', 150);
         }
-
-        // 🎈 لعبة البالونات بشروط 3 محاولات
-        let balloonInterval;
-        let balloonScore = 0;
-        let balloonLives = 3;
 
         function updateLivesDisplay() {
             let hearts = '';
@@ -1041,8 +1137,7 @@
         }
 
         function startBalloons() {
-            balloonScore = 0;
-            balloonLives = 3;
+            balloonScore = 0; balloonLives = 3;
             document.getElementById('balloon-score').innerText = balloonScore;
             updateLivesDisplay();
             document.getElementById('btn-start-balloons').classList.add('hidden');
@@ -1061,13 +1156,8 @@
                 const b = document.createElement('div'); 
                 b.classList.add('balloon'); 
                 
-                if (isGood) {
-                    b.innerText = goodEmojis[0];
-                    b.dataset.type = 'good';
-                } else {
-                    b.innerText = badEmojis[Math.floor(Math.random() * badEmojis.length)];
-                    b.dataset.type = 'bad';
-                }
+                if (isGood) { b.innerText = goodEmojis[0]; b.dataset.type = 'good'; } 
+                else { b.innerText = badEmojis[Math.floor(Math.random() * badEmojis.length)]; b.dataset.type = 'bad'; }
                 
                 b.style.left = Math.random() * 80 + '%'; 
                 b.style.animationDuration = (Math.random() * 2 + 3) + 's'; 
@@ -1075,23 +1165,13 @@
                 b.onmousedown = b.ontouchstart = function(e) { 
                     e.preventDefault(); 
                     if(this.dataset.type === 'good') { 
-                        triggerReward('✨', 2); 
-                        addStar(1); 
-                        balloonScore++;
-                        document.getElementById('balloon-score').innerText = balloonScore;
-                        speakWord('بوپ'); 
+                        triggerReward('✨', 2); addStar(1); balloonScore++; document.getElementById('balloon-score').innerText = balloonScore; speakWord('بوپ'); 
                     } else { 
-                        speakWord('ديري بالك'); 
-                        this.classList.add('bad-item-hit');
-                        balloonLives--;
-                        updateLivesDisplay();
-                        if(balloonLives <= 0) {
-                            endBalloonGame();
-                        }
+                        speakWord('ديري بالك'); this.classList.add('bad-item-hit'); balloonLives--; updateLivesDisplay();
+                        if(balloonLives <= 0) { endBalloonGame(); }
                     }
                     setTimeout(() => { if(this.parentNode) this.remove(); }, this.dataset.type === 'bad' ? 300 : 0);
                 };
-                
                 document.getElementById('balloon-area').appendChild(b); 
             }, 800);
         }
@@ -1105,58 +1185,6 @@
             document.getElementById('balloon-result-area').classList.add('flex');
             document.getElementById('balloon-final-score').innerText = balloonScore;
             speakWord('انتهت اللعبة');
-        }
-
-        function downloadBalloonResult() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 600;
-            canvas.height = 600;
-            
-            ctx.fillStyle = "#FCFAF6";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = "#D19AA8";
-            ctx.lineWidth = 15;
-            ctx.strokeRect(15, 15, canvas.width-30, canvas.height-30);
-
-            ctx.direction = "rtl";
-            ctx.textAlign = "center";
-            
-            ctx.font = "bold 45px Tajawal, sans-serif";
-            ctx.fillStyle = "#B87C8B";
-            ctx.fillText("تحدي البالونات 🎈", canvas.width/2, 100);
-
-            ctx.font = "bold 50px Tajawal, sans-serif";
-            ctx.fillStyle = "#C96B8A";
-            ctx.fillText("الاسم: جواهر 👑", canvas.width/2, 200);
-
-            ctx.font = "bold 60px Tajawal, sans-serif";
-            ctx.fillStyle = "#5C544F";
-            ctx.fillText(`النتيجة: ${balloonScore} بالون ⭐`, canvas.width/2, 320);
-
-            const now = new Date();
-            const dateStr = now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear();
-            
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            let ampm = hours >= 12 ? 'المساء' : 'الصباح';
-            hours = hours % 12;
-            hours = hours ? hours : 12; 
-            minutes = minutes < 10 ? '0'+minutes : minutes;
-            const timeStr = hours + ':' + minutes + ' ' + ampm;
-            
-            ctx.font = "bold 25px Tajawal, sans-serif";
-            ctx.fillStyle = "#9086A8";
-            ctx.fillText(`الساعة: ${timeStr} | التاريخ: ${dateStr}`, canvas.width/2, 450);
-
-            const link = document.createElement('a');
-            link.download = `نتيجة_بالونات_جواهر.jpg`;
-            link.href = canvas.toDataURL('image/jpeg');
-            link.click();
-            
-            speakWord('تم الحفظ يا بطلة');
-            addStar(3);
-            triggerReward('🎉', 20);
         }
 
         const memoryEmojis = ['👑', '🍓', '👗', '🦄', '🎨', '🍗', '🥭', '🚗'];
@@ -1180,12 +1208,12 @@
         function checkForMatch() {
             if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
                 firstCard.classList.add('matched'); secondCard.classList.add('matched'); matchedPairs++; addStar(2); speakWord('صح');
-                if (matchedPairs === 8) setTimeout(() => { triggerReward('🏆', 25); speakWord('ممتاز'); addStar(5); }, 500); resetBoard();
+                if (matchedPairs === 8) setTimeout(() => { triggerReward('🏆', 25); speakWord('ممتاز'); showSweetMessage('خلصتي اللوحة يا بطلة!'); addStar(5); }, 500); resetBoard();
             } else { lockBoard = true; setTimeout(() => { firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); resetBoard(); }, 1200); }
         }
         function resetBoard() { [hasFlippedCard, lockBoard] = [false, false]; [firstCard, secondCard] = [null, null]; }
 
-        // ================= وظائف الأقسام ================= //
+        // 8. الأقسام (فيديو، بطاقات، رسم، أشغال)
         function renderVideos() {
             const videoContainer = document.getElementById('videos-container'); videoContainer.innerHTML = '';
             educationalVideos.forEach(vid => {
@@ -1200,7 +1228,7 @@
             const craftsContainer = document.getElementById('handicrafts-container'); craftsContainer.innerHTML = '';
             myHandicrafts.forEach((craft) => {
                 craftsContainer.innerHTML += `<div class="glass-card rounded-xl overflow-hidden shadow-sm border border-[#EAE1D1] aspect-square cursor-pointer" onclick="openPhotoModal('${craft.url}')">
-                    <img src="${craft.url}" class="w-full h-full object-cover wiggle-hover" onerror="this.onerror=null; this.src='https://placehold.co/600x600/F5F2EB/5A504E?text=صورة+أشغال'">
+                    <img src="${craft.url}" class="w-full h-full object-cover wiggle-hover" onerror="this.onerror=null; this.src='https://placehold.co/600x600/F5F2EB/5A504E?text=صورة'">
                 </div>`;
             });
         }
@@ -1235,29 +1263,46 @@
             if(cardElement.classList.contains('flipped')) { speakWord(word); triggerReward(emoji, 3); addStar(); }
         }
 
-        // --- لوحة الرسم ---
-        const canvas = document.getElementById('drawingBoard'); const ctx = canvas.getContext('2d');
+        // 9. لوحة الرسم 🎨
+        const canvas = document.getElementById('drawingBoard'); 
+        const ctx = canvas ? canvas.getContext('2d') : null;
         let isDrawing = false, drawMode = 'color', drawValue = '#E2ACB8', lineWidth = 10; 
-        function initCanvas() { const rect = canvas.parentElement.getBoundingClientRect(); canvas.width = rect.width; canvas.height = rect.height || 320; ctx.fillStyle = "#FCF9F2"; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+        
+        function initCanvas() { 
+            if(!canvas || !ctx) return;
+            const rect = canvas.parentElement.getBoundingClientRect(); 
+            canvas.width = rect.width; canvas.height = rect.height || 320; 
+            ctx.fillStyle = "#FCF9F2"; ctx.fillRect(0, 0, canvas.width, canvas.height); 
+        }
         function resizeCanvas() { initCanvas(); }
         function getMousePos(e) { const rect = canvas.getBoundingClientRect(); if(e.type.includes('touch')) return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top }; return { x: e.clientX - rect.left, y: e.clientY - rect.top }; }
         function setDrawMode(mode, value) { drawMode = mode; drawValue = value; }
         function setLineWidth(width) { lineWidth = width; drawMode = 'color'; }
-        function startInteraction(e) { e.preventDefault(); const pos = getMousePos(e); if (drawMode === 'color') { isDrawing = true; ctx.beginPath(); ctx.moveTo(pos.x, pos.y); draw(e); } else if (drawMode === 'stamp') { ctx.font = "40px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(drawValue, pos.x, pos.y); triggerReward(drawValue, 2); speakWord('حلو'); } }
+        
+        function startInteraction(e) { 
+            e.preventDefault(); const pos = getMousePos(e); 
+            if (drawMode === 'color') { isDrawing = true; ctx.beginPath(); ctx.moveTo(pos.x, pos.y); draw(e); } 
+            else if (drawMode === 'stamp') { ctx.font = "40px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(drawValue, pos.x, pos.y); triggerReward(drawValue, 2); speakWord('حلو'); } 
+        }
         function stopDrawing(e) { if(e) e.preventDefault(); isDrawing = false; ctx.beginPath(); }
-        function draw(e) { if (!isDrawing || drawMode !== 'color') return; e.preventDefault(); const pos = getMousePos(e); ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = drawValue; ctx.lineTo(pos.x, pos.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+        function draw(e) { 
+            if (!isDrawing || drawMode !== 'color') return; 
+            e.preventDefault(); const pos = getMousePos(e); 
+            ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = drawValue; 
+            ctx.lineTo(pos.x, pos.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); 
+        }
         function clearCanvas() { initCanvas(); }
-        function downloadDrawing() { const link = document.createElement('a'); link.download = 'رسمة_جواهر.jpg'; link.href = canvas.toDataURL('image/jpeg'); link.click(); speakWord('تم الحفظ'); triggerReward('🎨', 10); }
-        canvas.addEventListener('mousedown', startInteraction); canvas.addEventListener('mousemove', draw); canvas.addEventListener('mouseup', stopDrawing); canvas.addEventListener('mouseout', stopDrawing);
-        canvas.addEventListener('touchstart', startInteraction, {passive: false}); canvas.addEventListener('touchmove', draw, {passive: false}); canvas.addEventListener('touchend', stopDrawing); canvas.addEventListener('touchcancel', stopDrawing);
-
-        function playSurprise() {
-            const surprises = ["بحبك يا بابا أبو جواهر! 💖", "انتي أشطر بنت! 👑", "يلا نلعب 🎈", `صار معك ${totalStars} نجوم! ⭐`];
-            const box = document.getElementById('surprise-box'); box.innerText = surprises[Math.floor(Math.random() * surprises.length)];
-            box.classList.remove('hidden'); triggerReward('🎁', 10); setTimeout(() => box.classList.add('hidden'), 3000);
+        function downloadDrawing() { 
+            if(!canvas) return;
+            const link = document.createElement('a'); link.download = 'رسمة_جواهر.jpg'; link.href = canvas.toDataURL('image/jpeg'); link.click(); speakWord('تم الحفظ'); triggerReward('🎨', 10); 
+        }
+        
+        if(canvas) {
+            canvas.addEventListener('mousedown', startInteraction); canvas.addEventListener('mousemove', draw); canvas.addEventListener('mouseup', stopDrawing); canvas.addEventListener('mouseout', stopDrawing);
+            canvas.addEventListener('touchstart', startInteraction, {passive: false}); canvas.addEventListener('touchmove', draw, {passive: false}); canvas.addEventListener('touchend', stopDrawing); canvas.addEventListener('touchcancel', stopDrawing);
         }
 
-        // --- تشغيل كل شيء عند فتح الصفحة ---
+        // 10. التشغيل (Bootstrap)
         window.onload = () => {
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('hide-screen');
